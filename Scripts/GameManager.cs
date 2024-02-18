@@ -4,11 +4,18 @@ public partial class GameManager : Node
 {
     public static GameManager Instance { get; private set; }
     public string CurrentLevel { get; set; }
+    public Player player;
 
 
 
     public override void _Ready()
     {
+        /// Temporary values
+
+        CurrentLevel = "DevWorld";
+
+        ///
+
         if (Instance == null)
         {
             Instance = this;
@@ -18,13 +25,5 @@ public partial class GameManager : Node
         }
         else
             QueueFree();
-
-
-
-        /// Temporary values
-
-        CurrentLevel = "DevWorld";
-
-        ///
     }
 }
