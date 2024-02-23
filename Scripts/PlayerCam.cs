@@ -2,28 +2,33 @@ using Godot;
 
 public partial class PlayerCam : Camera2D
 {
-	private Player player;
-	public Player Player
-	{
-		private get => player;
-		set
-		{
-			if (player == null)
-				player = value;
-			else
-				GD.PrintErr("PlayerCam cannot be assinged a second time!");
-		}
-	}
+	private Player ownerPlayer;
 
 
 
 	public override void _Ready()
 	{
+		ownerPlayer = GetParent<Player>();
 	}
 
 
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
+		Position = Vector2.Zero;
+		// TODO add method for moving slightl towards the cursor
 	}
+
+
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("ZoomIn"))
+			Zoom += new Vector2(0.3f, 0.3f);
+		
+        if (@event.IsActionPressed("ZoomOut"))
+			if (Zoom.X - 0.3f > 0.01f)
+				Zoom -= new Vector2(0.3f, 0.3f);
+		
+    }
 }

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://csqgdeqopf83n"]
+
+[ext_resource type="Script" path="res://Scripts/PreviewCursor.cs" id="1_78ymo"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jqewy"]
+
+[node name="PreviewCursor" type="Node2D"]
+top_level = true
+script = ExtResource("1_78ymo")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+scale = Vector2(16, 16)
+texture = SubResource("CanvasTexture_jqewy")

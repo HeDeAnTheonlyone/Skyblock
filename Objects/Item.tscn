@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtpwi3s0chsd1"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_ghtmd"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(16, 16)
-texture = SubResource("CanvasTexture_ghtmd")
