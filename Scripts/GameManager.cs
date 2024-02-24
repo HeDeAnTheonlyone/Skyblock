@@ -10,7 +10,7 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        /// Temporary values
+        /// TODO Remove Temporary values
 
         CurrentLevel = "DevWorld";
 
@@ -25,5 +25,7 @@ public partial class GameManager : Node
         }
         else
             QueueFree();
+
+        Input.MouseMode = Input.MouseModeEnum.Hidden;
     }
 }

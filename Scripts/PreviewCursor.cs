@@ -3,12 +3,25 @@ using Godot;
 
 public partial class PreviewCursor : Node2D
 {
+	private Player ownerPlayer;
 	private TileMap grid;
-	private Sprite2D sprite;
+	private Sprite2D highlighter;
+	private Sprite2D modeIcon;
 	public PackedScene placableObject;
 	private Vector2 mousePos;
 	private int gridSize;
-	public CursorMode Mode { get; set; } = CursorMode.Inspect;
+	private bool inCursorAnim;
+	private CursorMode mode = CursorMode.Inspect;
+	public CursorMode Mode
+	{
+		get => mode;
+		set
+		{
+			mode = value;
+			float size = modeIcon.Texture.GetSize().Y;
+			modeIcon.RegionRect = new Rect2((int)value * modeIcon.RegionRect.Size.Y, 0, size, size);
+		}
+	}
 
 
 
@@ -17,21 +30,17 @@ public partial class PreviewCursor : Node2D
 	{
 		Inspect,
 		Build,
-		Destroy,
 		Break
 	}
-
-	private void CursorToInspect() => Mode = CursorMode.Inspect;
-	private void CursorToBuild() => Mode = CursorMode.Build;
-	private void CursorToDetroy() => Mode = CursorMode.Destroy;
-	private void CursorToBreak() => Mode = CursorMode.Break;
 
 
 
 	public override void _Ready()
     {
+		ownerPlayer = GetParent<Player>();
 		grid = GetTree().Root.GetNode<TileMap>($"{GameManager.Instance.CurrentLevel}/Grid");
-		sprite = GetNode<Sprite2D>("Sprite");
+		highlighter = GetNode<Sprite2D>("Highlighter");
+		modeIcon = GetNode<Sprite2D>("ModeIcon");
 		gridSize = grid.TileSet.TileSize[0];
 		
 		Pulse();
@@ -41,37 +50,94 @@ public partial class PreviewCursor : Node2D
 
     public override void _Input(InputEvent @event)
     {
-		if (@event.IsActionPressed("TileInteract"))
-		{
-			Vector2I placePos = (Vector2I)(mousePos - mousePos % grid.TileSet.TileSize[0]) / 16;
+		if (@event.IsActionPressed("TileInteract") && ownerPlayer.Alive)
+			TileInteraction();
 
-			if (mousePos.X < 0)
-				placePos.X -= 1;
+		if (@event.IsActionPressed("CurserModeInspect"))
+			Mode = CursorMode.Inspect;
+			
+		if (@event.IsActionPressed("CursorModeBuild"))
+			Mode = CursorMode.Build;
 
-			if (mousePos.Y < 0)
-				placePos.Y -= 1;
-
-			switch (Mode)
-			{
-				case CursorMode.Inspect:
-					break;
-
-				case CursorMode.Build:
-					grid.SetCell(1, placePos, 2, new Vector2I(1, 0));
-					break;
-
-				case CursorMode.Destroy:
-					grid.SetCell(1, placePos, 2);
-					break;
-
-				case CursorMode.Break:
-					break;
-				
-				default:
-					throw new Exception($"Invalid cursor mode: {Mode}");
-			}
-		}
+		if (@event.IsActionPressed("CursorModeBreak"))
+			Mode = CursorMode.Break;
     }
+
+
+
+	private void TileInteraction()
+	{
+		Vector2I placePos = (Vector2I)(mousePos - mousePos % gridSize) / gridSize;
+
+		if (mousePos.X < 0)
+			placePos.X -= 1;
+
+		if (mousePos.Y < 0)
+			placePos.Y -= 1;
+
+		switch (Mode)
+		{
+			case CursorMode.Inspect:
+				ModeIconAnim();
+				break;
+
+			case CursorMode.Build:
+				ModeIconAnim();
+				if (Input.IsActionPressed("LeftClick"))
+				{
+					grid.SetCell(1, placePos, 2, new Vector2I(1, 0));
+				}
+
+				if (Input.IsActionPressed("RightClick"))
+				{
+					grid.SetCell(1, placePos, 2);
+				}
+				break;
+
+			case CursorMode.Break:
+				ModeIconAnim();
+				break;
+
+			default:
+				throw new Exception($"Invalid cursor mode: {Mode}");
+		}
+	}
+
+
+
+	private void ModeIconAnim()
+	{
+		if (inCursorAnim)
+			return;
+
+		inCursorAnim = true;
+		Tween swingAnim = CreateTween();
+
+		switch (Mode)
+		{
+			case CursorMode.Inspect:
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", -90, 0.4).SetTrans(Tween.TransitionType.Circ);
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 0, 0.4).SetTrans(Tween.TransitionType.Circ);
+				break;
+
+			case CursorMode.Build:
+			case CursorMode.Break:
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 90, 0.3).SetTrans(Tween.TransitionType.Elastic);
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 0, 0.2).SetEase(Tween.EaseType.In);
+				break;
+
+			default:
+				swingAnim.Kill();
+				return;
+		}
+			
+	
+		swingAnim.Finished += OnCursorAnimFinished;
+	}
+
+
+
+	private void OnCursorAnimFinished() => inCursorAnim = false;
 
 
 
@@ -101,7 +167,7 @@ public partial class PreviewCursor : Node2D
 	private void Pulse()
 	{
 		Tween tween = CreateTween().SetLoops();
-		tween.TweenProperty(sprite, "modulate:a", 0.1, 1);
-		tween.TweenProperty(sprite, "modulate:a", 0.5, 1);
+		tween.TweenProperty(highlighter, "modulate:a", 0.1, 1);
+		tween.TweenProperty(highlighter, "modulate:a", 0.5, 1);
 	}
 }

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://csqgdeqopf83n"]
+[gd_scene load_steps=4 format=3 uid="uid://csqgdeqopf83n"]
 
 [ext_resource type="Script" path="res://Scripts/PreviewCursor.cs" id="1_78ymo"]
+[ext_resource type="Texture2D" uid="uid://ebbiegskwktj" path="res://Assets/CursorModes.png" id="2_oam4e"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jqewy"]
 
@@ -8,7 +9,13 @@
 top_level = true
 script = ExtResource("1_78ymo")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Highlighter" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(16, 16)
 texture = SubResource("CanvasTexture_jqewy")
+
+[node name="ModeIcon" type="Sprite2D" parent="."]
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2_oam4e")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)

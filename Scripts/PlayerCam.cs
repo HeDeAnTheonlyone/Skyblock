@@ -30,5 +30,7 @@ public partial class PlayerCam : Camera2D
 			if (Zoom.X - 0.3f > 0.01f)
 				Zoom -= new Vector2(0.3f, 0.3f);
 		
+		if (@event.IsActionPressed("ZoomReset"))
+			Zoom = new Vector2(3.5f, 3.5f);		
     }
 }

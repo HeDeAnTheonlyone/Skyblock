@@ -5,7 +5,7 @@ public partial class Player : RigidBody2D
 	[ExportCategory("Movement")]
 	[Export] public float MoveSpeed { get; set; }
 	private Vector2 moveDir;
-	private bool alive = true;
+	public bool Alive { get; private set; } = true;
 
 
 
@@ -25,7 +25,7 @@ public partial class Player : RigidBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (alive)
+		if (Alive)
 			Movement();
 	}
 
@@ -48,6 +48,6 @@ public partial class Player : RigidBody2D
 	{
 		Tween tween = CreateTween();
 		tween.TweenProperty(this, "scale", Vector2.Zero, 1);
-		alive = false;
+		Alive = false;
 	}
 }

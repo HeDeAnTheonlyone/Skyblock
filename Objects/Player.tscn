@@ -28,8 +28,6 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_fxoxy")
 debug_color = Color(0, 0.643137, 0.270588, 0.419608)
 
-[node name="PlayerCam" parent="." instance=ExtResource("3_i0s1y")]
-
 [node name="GroundDetector" type="Area2D" parent="."]
 input_pickable = false
 
@@ -40,40 +38,10 @@ debug_color = Color(0.890196, 0, 0.0784314, 0.419608)
 
 [node name="PreviewCursor" parent="." instance=ExtResource("4_yqlwi")]
 
+[node name="PlayerCam" parent="." instance=ExtResource("3_i0s1y")]
+offset = Vector2(0, -16)
+zoom = Vector2(3.5, 3.5)
+
 [node name="Hud" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Hud"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 10
-theme_override_constants/separation = 10
-
-[node name="Button" type="Button" parent="Hud/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Inspect"
-
-[node name="Button2" type="Button" parent="Hud/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Build"
-
-[node name="Button3" type="Button" parent="Hud/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Destroy"
-
-[node name="Button4" type="Button" parent="Hud/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Break"
-
 [connection signal="body_exited" from="GroundDetector" to="." method="Death"]
-[connection signal="pressed" from="Hud/HBoxContainer/Button" to="PreviewCursor" method="CursorToInspect"]
-[connection signal="pressed" from="Hud/HBoxContainer/Button2" to="PreviewCursor" method="CursorToBuild"]
-[connection signal="pressed" from="Hud/HBoxContainer/Button3" to="PreviewCursor" method="CursorToDetroy"]
-[connection signal="pressed" from="Hud/HBoxContainer/Button4" to="PreviewCursor" method="CursorToBreak"]
