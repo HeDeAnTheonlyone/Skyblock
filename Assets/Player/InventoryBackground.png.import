@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d13jbl2rd57b7"
-path="res://.godot/imported/new_sirius_front.png-6e79283d11acaac8e29048062d0978cc.ctex"
+uid="uid://bhwtdpixty5nu"
+path="res://.godot/imported/InventoryBackground.png-bde92eb67318db73be8a78bdcb92d71e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/new_sirius_front.png"
-dest_files=["res://.godot/imported/new_sirius_front.png-6e79283d11acaac8e29048062d0978cc.ctex"]
+source_file="res://Assets/Player/InventoryBackground.png"
+dest_files=["res://.godot/imported/InventoryBackground.png-bde92eb67318db73be8a78bdcb92d71e.ctex"]
 
 [params]
 

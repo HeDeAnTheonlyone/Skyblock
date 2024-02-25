@@ -2,23 +2,17 @@ using Godot;
 
 public partial class Player : RigidBody2D
 {
+	public bool Alive { get; private set; } = true;
 	[ExportCategory("Movement")]
 	[Export] public float MoveSpeed { get; set; }
 	private Vector2 moveDir;
-	public bool Alive { get; private set; } = true;
+	private AnimatedSprite2D sprite;
 
 
 
 	public override void _Ready()
 	{
-	
-	}
-
-	
-	
-	public override void _Process(double delta)
-	{
-		
+		sprite = GetNode<AnimatedSprite2D>("Sprite");	
 	}
 
 
@@ -27,6 +21,8 @@ public partial class Player : RigidBody2D
 	{
 		if (Alive)
 			Movement();
+		
+		Animation();
 	}
 
 
@@ -40,6 +36,32 @@ public partial class Player : RigidBody2D
 		Vector2 motion = Vector2.Zero.DirectionTo(moveDir) * MoveSpeed;
 
 		MoveAndCollide(motion);
+	}
+
+
+
+	private void Animation()
+	{
+		if (moveDir == Vector2.Zero)
+		{
+			sprite.Stop();
+			return;
+		}
+
+		if (Mathf.Abs(moveDir.X) > Mathf.Abs(moveDir.Y))
+		{
+			if (moveDir.X > 0)
+				sprite.Play("WalkRight");
+			else
+				sprite.Play("WalkLeft");
+		}
+		else
+		{
+			if (moveDir.Y > 0)
+				sprite.Play("WalkDown");
+			else
+				sprite.Play("WalkUp");
+		}
 	}
 
 

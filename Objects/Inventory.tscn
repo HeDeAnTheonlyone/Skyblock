@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmpbqhy6776dh"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory.cs" id="1_1n2d4"]
+[ext_resource type="Texture2D" uid="uid://bhwtdpixty5nu" path="res://Assets/Player/InventoryBackground.png" id="2_3iv0y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5a3yd"]
+bg_color = Color(0, 0, 0, 0)
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.352941)
+shadow_size = 30
+
+[node name="Inventory" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_1n2d4")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_3iv0y")
+
+[node name="ColorRect" type="Panel" parent="MarginContainer/TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5a3yd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30

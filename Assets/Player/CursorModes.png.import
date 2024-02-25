@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ebbiegskwktj"
-path="res://.godot/imported/CursorModes.png-05ebfe0be7f426f6e7f78d703e1ae059.ctex"
+path="res://.godot/imported/CursorModes.png-6907a0a60d6795a06cd34cc4e83ef037.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CursorModes.png"
-dest_files=["res://.godot/imported/CursorModes.png-05ebfe0be7f426f6e7f78d703e1ae059.ctex"]
+source_file="res://Assets/Player/CursorModes.png"
+dest_files=["res://.godot/imported/CursorModes.png-6907a0a60d6795a06cd34cc4e83ef037.ctex"]
 
 [params]
 

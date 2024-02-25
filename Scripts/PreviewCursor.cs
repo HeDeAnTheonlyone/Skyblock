@@ -122,7 +122,7 @@ public partial class PreviewCursor : Node2D
 
 			case CursorMode.Build:
 			case CursorMode.Break:
-				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 90, 0.3).SetTrans(Tween.TransitionType.Elastic);
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 90, 0.3).SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
 				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 0, 0.2).SetEase(Tween.EaseType.In);
 				break;
 
@@ -130,7 +130,6 @@ public partial class PreviewCursor : Node2D
 				swingAnim.Kill();
 				return;
 		}
-			
 	
 		swingAnim.Finished += OnCursorAnimFinished;
 	}
