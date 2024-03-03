@@ -1,0 +1,15 @@
+AnimatedSprite2D
+ColorRect
+ItemList
+Label
+MarginContainer
+Panel
+TextureRect
+GridContainer
+CanvasLayer
+Sprite2D
+CharacterBody2D
+RigidBody2D
+Camera2D
+Area2D
+CollisionShape2D

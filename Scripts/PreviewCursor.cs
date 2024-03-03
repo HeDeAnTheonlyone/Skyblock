@@ -42,7 +42,14 @@ public partial class PreviewCursor : Node2D
 		highlighter = GetNode<Sprite2D>("Highlighter");
 		modeIcon = GetNode<Sprite2D>("ModeIcon");
 		gridSize = grid.TileSet.TileSize[0];
-		
+
+		// TileSetAtlasSource a = grid.TileSet.GetSource(1) as TileSetAtlasSource;
+		// a.UseTexturePadding = false;
+
+		// AtlasTexture b = new AtlasTexture();
+		// b.Atlas = a.Texture;
+		// b.Region = a.GetTileTextureRegion(new Vector2I(1,1));
+
 		Pulse();
     }
 

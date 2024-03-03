@@ -5,12 +5,13 @@ using Godot;
 [GlobalClass]
 public partial class Item : Resource
 {
-    public ImageTexture Texture { get; private set; }
+    public AtlasTexture Texture { get; private set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    private int StackSize { get; set; }
 
 
-    public Item(ImageTexture texture, string name, string description)
+    public Item(AtlasTexture texture, string name, string description)
     {
         Texture = texture;
         Name = name;

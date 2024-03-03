@@ -5,6 +5,12 @@
 
 [node name="Grid" type="TileMap"]
 z_index = -10
+y_sort_enabled = true
 tile_set = ExtResource("1_71ky2")
 format = 2
+layer_0/name = "Ground"
+layer_1/name = "Decorations"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_p8240")
