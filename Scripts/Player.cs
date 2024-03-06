@@ -20,11 +20,11 @@ public partial class Player : RigidBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Alive)
-			Movement();
-		
-		Animation();
+		{
+			Movement();	
+			Animation();
+		}
 	}
-
 
 
 

@@ -1,28 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\_Code\\Skyblock\\Skyblock.csproj": {}
+    "C:\\Code\\Skyblock\\Skyblock.csproj": {}
   },
   "projects": {
-    "F:\\_Code\\Skyblock\\Skyblock.csproj": {
+    "C:\\Code\\Skyblock\\Skyblock.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\_Code\\Skyblock\\Skyblock.csproj",
+        "projectUniqueName": "C:\\Code\\Skyblock\\Skyblock.csproj",
         "projectName": "Skyblock",
-        "projectPath": "F:\\_Code\\Skyblock\\Skyblock.csproj",
-        "packagesPath": "C:\\Users\\HeDeAn\\.nuget\\packages\\",
-        "outputPath": "F:\\_Code\\Skyblock\\.godot\\mono\\temp\\obj\\",
+        "projectPath": "C:\\Code\\Skyblock\\Skyblock.csproj",
+        "packagesPath": "C:\\Users\\tanne\\.nuget\\packages\\",
+        "outputPath": "C:\\Code\\Skyblock\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HeDeAn\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\tanne\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
@@ -41,15 +37,15 @@
           "dependencies": {
             "Godot.SourceGenerators": {
               "target": "Package",
-              "version": "[4.2.1, )"
+              "version": "[4.2.0, )"
             },
             "GodotSharp": {
               "target": "Package",
-              "version": "[4.2.1, )"
+              "version": "[4.2.0, )"
             },
             "GodotSharpEditor": {
               "target": "Package",
-              "version": "[4.2.1, )"
+              "version": "[4.2.0, )"
             }
           },
           "imports": [
