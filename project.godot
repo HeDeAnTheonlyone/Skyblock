@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 GameManager="*res://Scripts/GameManager.cs"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
+
 [dotnet]
 
 project/assembly_name="Skyblock"

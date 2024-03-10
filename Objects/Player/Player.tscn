@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=3 uid="uid://cdsj51bbxcsu3"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_r4616"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_4urdj"]
 [ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="2_5mg7w"]
-[ext_resource type="PackedScene" uid="uid://cbr1ev3c15aw8" path="res://Objects/PlayerCam.tscn" id="3_i0s1y"]
-[ext_resource type="PackedScene" uid="uid://csqgdeqopf83n" path="res://Objects/PreviewCursor.tscn" id="4_yqlwi"]
-[ext_resource type="PackedScene" uid="uid://cmpbqhy6776dh" path="res://Objects/Inventory.tscn" id="5_yp43n"]
+[ext_resource type="PackedScene" uid="uid://cbr1ev3c15aw8" path="res://Objects/Player/PlayerCam.tscn" id="3_i0s1y"]
+[ext_resource type="PackedScene" uid="uid://csqgdeqopf83n" path="res://Objects/Player/PreviewCursor.tscn" id="4_yqlwi"]
+[ext_resource type="PackedScene" uid="uid://cmpbqhy6776dh" path="res://Objects/Inventory/PlayerInventory.tscn" id="5_1yia4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmpks"]
 atlas = ExtResource("2_5mg7w")
@@ -152,7 +152,7 @@ collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
 lock_rotation = true
-script = ExtResource("1_r4616")
+script = ExtResource("1_4urdj")
 MoveSpeed = 1.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -179,7 +179,7 @@ debug_color = Color(0.890196, 0, 0.0784314, 0.419608)
 offset = Vector2(0, -16)
 zoom = Vector2(3.5, 3.5)
 
-[node name="Inventory" parent="." instance=ExtResource("5_yp43n")]
+[node name="Inventory" parent="." instance=ExtResource("5_1yia4")]
 
 [node name="Hud" type="CanvasLayer" parent="."]
 

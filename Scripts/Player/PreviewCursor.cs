@@ -18,8 +18,8 @@ public partial class PreviewCursor : Node2D
 		set
 		{
 			mode = value;
-			float size = modeIcon.Texture.GetSize().Y;
-			modeIcon.RegionRect = new Rect2((int)value * modeIcon.RegionRect.Size.Y, 0, size, size);
+			float s = GameManager.Instance.SingleTileSize;
+			modeIcon.RegionRect = new Rect2((int)value * s, 0, s, s);
 		}
 	}
 
@@ -41,7 +41,7 @@ public partial class PreviewCursor : Node2D
 		grid = GetTree().Root.GetNode<TileMap>($"{GameManager.Instance.CurrentLevel}/Grid");
 		highlighter = GetNode<Sprite2D>("Highlighter");
 		modeIcon = GetNode<Sprite2D>("ModeIcon");
-		gridSize = grid.TileSet.TileSize[0];
+		gridSize = GameManager.Instance.SingleTileSize;
 
 		// TileSetAtlasSource a = grid.TileSet.GetSource(1) as TileSetAtlasSource;
 		// a.UseTexturePadding = false;

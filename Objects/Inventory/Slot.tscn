@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlgxuw1fy6kp8"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/Slot.cs" id="1_lvqhc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0edra"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 0.117647)
+border_blend = true
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 3.0
+
+[node name="Slot" type="AspectRatioContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 16.0
+offset_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 3
+script = ExtResource("1_lvqhc")
+
+[node name="Bg" type="Panel" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0edra")

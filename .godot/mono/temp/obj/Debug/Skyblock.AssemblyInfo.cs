@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Skyblock")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66399922a8e534a978af478213796031fcca7b2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf6cdf988f1dbc3e6785ad68a9cf57c4882b5564")]
 [assembly: System.Reflection.AssemblyProductAttribute("Skyblock")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Skyblock")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

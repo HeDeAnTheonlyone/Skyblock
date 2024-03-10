@@ -1,0 +1,317 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmpbqhy6776dh"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/PlayerInventory.cs" id="1_mbovw"]
+[ext_resource type="Texture2D" uid="uid://bhwtdpixty5nu" path="res://Assets/Player/InventoryBg.png" id="2_asydg"]
+[ext_resource type="PackedScene" uid="uid://dlgxuw1fy6kp8" path="res://Objects/Inventory/Slot.tscn" id="3_k0tbr"]
+[ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="4_38o1r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5a3yd"]
+bg_color = Color(0, 0, 0, 0)
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.352941)
+shadow_size = 30
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o381u"]
+atlas = ExtResource("4_38o1r")
+region = Rect2(8, 0, 16, 32)
+
+[node name="PlayerInventory" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_mbovw")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="Padding" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Sprite" type="TextureRect" parent="Padding"]
+layout_mode = 2
+texture = ExtResource("2_asydg")
+
+[node name="Shadow" type="Panel" parent="Padding/Sprite"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5a3yd")
+
+[node name="InnerPadding" type="MarginContainer" parent="Padding"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Splitter" type="HSplitContainer" parent="Padding/InnerPadding"]
+layout_mode = 2
+
+[node name="ItemGrid" type="GridContainer" parent="Padding/InnerPadding/Splitter"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 10
+
+[node name="Slot0" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot1" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot2" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot3" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot4" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot5" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot6" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot7" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot8" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot9" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot10" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot11" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot12" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot13" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot14" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot15" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot16" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot17" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot18" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot19" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot20" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot21" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot22" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot23" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot24" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot25" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot26" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot27" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot28" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot29" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot30" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot31" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot32" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot33" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot34" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot35" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot36" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot37" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot38" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot39" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot40" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot41" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot42" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot43" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot44" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot45" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot46" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot47" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot48" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot49" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot50" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot51" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot52" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot53" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot54" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot55" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot56" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot57" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot58" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot59" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot60" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot61" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot62" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot63" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot64" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot65" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot66" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot67" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot68" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot69" parent="Padding/InnerPadding/Splitter/ItemGrid" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="PlayerSprite" type="TextureRect" parent="Padding/InnerPadding/Splitter"]
+self_modulate = Color(1, 1, 1, 0.117647)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_o381u")
+
+[node name="ArmorPadding" type="MarginContainer" parent="Padding/InnerPadding/Splitter/PlayerSprite"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 65
+
+[node name="ArmorList" type="VBoxContainer" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Slot0" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot1" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList" instance=ExtResource("3_k0tbr")]
+layout_mode = 2
+
+[node name="Slot2" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList" instance=ExtResource("3_k0tbr")]
+layout_mode = 2

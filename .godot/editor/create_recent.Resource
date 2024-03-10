@@ -1,3 +1,2 @@
-ItemPlacable
-Item
+AtlasTexture
 TileSet

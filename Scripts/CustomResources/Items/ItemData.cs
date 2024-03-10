@@ -3,17 +3,18 @@ using Godot;
 
 
 [GlobalClass, Icon("res://Assets/Icons/Item.svg")]
-public partial class ItemData : Resource
+public abstract partial class ItemData : Resource
 {
     [ExportGroup("Item")]
     [ExportSubgroup("Texture")]
-    [Export] public AtlasTexture Texture { get; set; }
+    [Export] public virtual AtlasTexture Texture { get; set; }
     //
     [ExportSubgroup("Properties")]
     [Export] public string Name { get; set; }
     [Export] public string Description { get; set; }
-    [Export] public int MaxStackSize { get; set; }
+    [Export] public virtual int MaxStackSize { get; set; } = 1;
     [Export] public int StackSize { get; set; }
+    [Export] public ItemRarity Rarity { get; set; }
 
 
 
@@ -27,5 +28,15 @@ public partial class ItemData : Resource
         Name = name;
         Description = description;
         MaxStackSize = maxStackSize;
+    }
+
+
+
+    public enum ItemRarity
+    {
+        Common,
+        Rare,
+        ExtremlyRare,
+        Legendary
     }
 }
