@@ -24,6 +24,7 @@ process_mode = 3
 script = ExtResource("1_mbovw")
 
 [node name="Background" type="ColorRect" parent="."]
+z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,6 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -46,6 +48,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="Sprite" type="TextureRect" parent="Padding"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_asydg")
 
 [node name="Shadow" type="Panel" parent="Padding/Sprite"]
@@ -56,10 +59,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5a3yd")
 
 [node name="InnerPadding" type="MarginContainer" parent="Padding"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
@@ -67,6 +72,8 @@ theme_override_constants/margin_bottom = 30
 
 [node name="Splitter" type="HSplitContainer" parent="Padding/InnerPadding"]
 layout_mode = 2
+mouse_filter = 2
+dragger_visibility = 1
 
 [node name="ItemGrid" type="GridContainer" parent="Padding/InnerPadding/Splitter"]
 layout_direction = 2
@@ -290,6 +297,7 @@ layout_mode = 2
 self_modulate = Color(1, 1, 1, 0.117647)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 texture = SubResource("AtlasTexture_o381u")
 
 [node name="ArmorPadding" type="MarginContainer" parent="Padding/InnerPadding/Splitter/PlayerSprite"]
@@ -299,6 +307,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_top = 65
 
 [node name="ArmorList" type="VBoxContainer" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding"]

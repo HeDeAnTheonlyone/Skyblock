@@ -68,11 +68,11 @@ public partial class ItemPlacableData : ItemData
     {
         switch (Texture.Atlas.ResourcePath)
         {
-            case "res://Assets/GroundTiles.png":
+            case "res://Assets/Items/Floor.png":
                 placeLayer = 0;
                 break;
 
-            case "res://Assets/DecorationsTiles.png":
+            case "res://Assets/Items/Decoration.png":
                 placeLayer = 1;
                 break;
 

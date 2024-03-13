@@ -7,17 +7,25 @@ public partial class Player : RigidBody2D
 	[Export] public float MoveSpeed { get; set; }
 	private Vector2 moveDir;
 	private AnimatedSprite2D sprite;
+	private PlayerInventory inventory;
+
+
+
+	[Export] public ItemData[] testItems;
 
 
 
 	public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite2D>("Sprite");	
+		inventory = GetNode<PlayerInventory>("PlayerInventory");
+
+		inventory.Data.Items = testItems;
 	}
 
 
 
-	public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
 		if (Alive)
 		{
@@ -66,10 +74,12 @@ public partial class Player : RigidBody2D
 
 
 
+	#region Signals
 	private void Death(Node body)
 	{
 		Tween tween = CreateTween();
 		tween.TweenProperty(this, "scale", Vector2.Zero, 1);
 		Alive = false;
 	}
+	#endregion
 }

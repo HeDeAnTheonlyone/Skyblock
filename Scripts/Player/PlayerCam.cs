@@ -16,7 +16,7 @@ public partial class PlayerCam : Camera2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Position = Vector2.Zero;
-		// TODO add method for moving slightl towards the cursor
+		// TODO add method for moving slightly towards the cursor
 	}
 
 

@@ -12,7 +12,7 @@ public abstract partial class ItemData : Resource
     [ExportSubgroup("Properties")]
     [Export] public string Name { get; set; }
     [Export] public string Description { get; set; }
-    [Export] public virtual int MaxStackSize { get; set; } = 1;
+    [Export] public virtual int MaxStackSize { get; set; }
     [Export] public int StackSize { get; set; }
     [Export] public ItemRarity Rarity { get; set; }
 
@@ -22,7 +22,7 @@ public abstract partial class ItemData : Resource
 
 
 
-    public ItemData(AtlasTexture texture, string name, string description, int maxStackSize = 1)
+    public ItemData(AtlasTexture texture, string name, string description, int maxStackSize)
     {
         Texture = texture;
         Name = name;
