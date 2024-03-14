@@ -14,6 +14,7 @@ public abstract partial class ItemData : Resource
     [Export] public string Description { get; set; }
     [Export] public virtual int MaxStackSize { get; set; }
     [Export] public int StackSize { get; set; }
+    [Export] public Slot.SlotTypes SlotType { get; set; }
     [Export] public ItemRarity Rarity { get; set; }
 
 

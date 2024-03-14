@@ -7,13 +7,20 @@ public partial class InventoryPlayerData : InventoryData
 {
     [ExportGroup("Properties")]
     [Export] public ItemData[] Armor { get; set; } = new ItemData[3];
-    [Export] public override ItemData[] Items { get; set; } = new ItemData[70];
+    public Slot[] ArmorSlots { get; set; }
 
 
 
-    public void DisplayItemsInSlots(Slot[] itemSlots, ItemData[] items, Slot[] armorSlots, ItemData[] armor)
+    public InventoryPlayerData()
     {
-        DisplayItemsInSlots(itemSlots, items);
-        DisplayItemsInSlots(armorSlots, armor);
+        Items = new ItemData[70];
+    }
+
+
+
+    public override void MoveItem(InventoryItem item)
+    {
+        if (!MoveItemInternal(item, ItemSlots))
+            MoveItemInternal(item, ArmorSlots);
     }
 }

@@ -26,12 +26,12 @@ public partial class ItemPlacableData : ItemData
         }
     }
 
-    [ExportSubgroup("Properties")]
-    public override int MaxStackSize { get; set; } = 1000;
 
 
-
-    public ItemPlacableData() : base() {}
+    public ItemPlacableData() : base()
+    {
+        MaxStackSize = 1000;
+    }
 
 
 

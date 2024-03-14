@@ -7,8 +7,6 @@ public partial class PlayerInventory : Inventory
 {
 	[Export] public new InventoryPlayerData Data { get; private set; } = new InventoryPlayerData();
 	private VBoxContainer armorList;
-	private Slot[] armorSlots;
-	public static InventoryItem movedItem;
 
 
 
@@ -20,10 +18,11 @@ public partial class PlayerInventory : Inventory
 
 
 	protected override bool IsDataNull() => Data == null;
+    protected override InventoryData GetData() => Data;
 
 
 
-	protected override void GetSlotParentNodes()
+    protected override void GetSlotParentNodes()
 	{
 		itemGrid = GetNode<GridContainer>("Padding/InnerPadding/Splitter/ItemGrid");
 		armorList = GetNode<VBoxContainer>("Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList");
@@ -33,8 +32,8 @@ public partial class PlayerInventory : Inventory
 
     protected override void GetSlots()
     {
-        base.GetSlots();
-		armorSlots = armorList.GetChildren().Cast<Slot>().ToArray();
+		Data.ItemSlots = itemGrid.GetChildren().Cast<Slot>().ToArray();
+		Data.ArmorSlots = armorList.GetChildren().Cast<Slot>().ToArray();
 	}
 
 
@@ -55,7 +54,7 @@ public partial class PlayerInventory : Inventory
 	public override void Open()
 	{
 		base.Open();
-
-		Data.DisplayItemsInSlots(itemSlots, Data.Items, armorSlots, Data.Armor);
+		DisplayItemsInSlots(Data.ItemSlots, Data.Items);
+		DisplayItemsInSlots(Data.ArmorSlots, Data.Armor);
 	}
 }

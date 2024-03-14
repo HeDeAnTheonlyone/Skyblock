@@ -7,49 +7,46 @@ public abstract partial class InventoryData : Resource
 {
     [ExportGroup("Properties")]
     [Export] public virtual ItemData[] Items { get; set; }
+    public Slot[] ItemSlots { get; set; }
 
 
 
-    public virtual void DisplayItemsInSlots(Slot[] slots, ItemData[] items)
+    public virtual void MoveItem(InventoryItem item) => MoveItemInternal(item, ItemSlots);
+
+
+
+    protected bool MoveItemInternal(InventoryItem item, Slot[] slots)
     {
-        PackedScene invItem = (PackedScene)GD.Load("res://Objects/Inventory/InventoryItem.tscn");
+        Rect2 itemCenter = new Rect2(item.GlobalPosition + item.Size / 2, Vector2.Zero);
+        Slot oldSlot = item.GetParent<Slot>();
 
-        for (int i = 0; i < items.Length; i++)
-        {   
-            if (items[i] == null)
+        foreach (Slot slot in slots)
+        {
+            Rect2 slotArea = new Rect2(slot.GlobalPosition, slot.Size);
+
+            if (slotArea.Intersects(itemCenter))
             {
-                if (slots[i].GetChildCount() > 1)
-                    slots[i].GetNode<InventoryItem>("InventoryItem").QueueFree();
+                if (!slot.MatchType(item.Data.SlotType))
+                    return false;
 
-                continue;
-            }
+                oldSlot.RemoveChild(item);
 
-            if (slots[i].GetChildCount() > 1)
-            {
-                InventoryItem item = slots[i].GetNode<InventoryItem>("InventoryItem");
-
-                if (item.Data != items[i])
+                if (slot.GetChildCount() > 1)
                 {
-                    item.QueueFree();
-                    InventoryItem invItemInstance = invItem.Instantiate() as InventoryItem;
-                    invItemInstance.Data = items[i];
-                    slots[i].AddChild(invItemInstance);
+                    InventoryItem occupyingItem = slot.GetNode<InventoryItem>("InventoryItem");
+
+                    slot.RemoveChild(occupyingItem);
+                    slot.AddChild(item);
+                    oldSlot.AddChild(occupyingItem);
                 }
-            }
-            else
-            {
-                InventoryItem invItemInstance = invItem.Instantiate() as InventoryItem;
-                invItemInstance.Data = items[i];
-                slots[i].AddChild(invItemInstance);
+                else
+                    slot.AddChild(item);
+
+                return true;
             }
         }
-    }
 
-
-
-    public virtual void MoveItems()
-    {
-        // TODO
+        return false;
     }
 
 

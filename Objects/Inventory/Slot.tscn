@@ -29,6 +29,3 @@ custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0edra")
-
-[connection signal="child_entered_tree" from="." to="." method="RegisterOnEnter"]
-[connection signal="child_exiting_tree" from="." to="." method="DeregisterOnExit"]

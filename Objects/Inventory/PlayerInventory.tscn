@@ -318,9 +318,12 @@ alignment = 1
 
 [node name="Slot0" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList" instance=ExtResource("3_k0tbr")]
 layout_mode = 2
+SlotType = 1
 
 [node name="Slot1" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList" instance=ExtResource("3_k0tbr")]
 layout_mode = 2
+SlotType = 2
 
 [node name="Slot2" parent="Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList" instance=ExtResource("3_k0tbr")]
 layout_mode = 2
+SlotType = 3

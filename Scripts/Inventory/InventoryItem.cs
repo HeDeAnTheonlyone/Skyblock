@@ -5,9 +5,10 @@ using Godot;
 public partial class InventoryItem : Control
 {
     [Export] public ItemData Data { get; set; }
+    public InventoryData inventory;
     private TextureRect sprite;
     private bool followCursor = false;
-    private readonly Vector2 defaultPos = new Vector2(-0.5f, 0.0f);
+    private int prevZIndex;
 
 
 
@@ -50,13 +51,22 @@ public partial class InventoryItem : Control
     public override void _GuiInput(InputEvent @event)
     {
         if (@event.IsActionPressed("LeftClick"))
+        {
+            prevZIndex = ZIndex;
+            ZIndex++;
             followCursor = true;
+        }
 
         if (@event.IsActionReleased("LeftClick"))
         {
             followCursor = false;
-            Position = defaultPos;
-            PlayerInventory.movedItem = this;
+            ZIndex = prevZIndex;
+            inventory.MoveItem(this);
+            CenterInSlot();
         }
     }
+
+
+
+    private void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
 }

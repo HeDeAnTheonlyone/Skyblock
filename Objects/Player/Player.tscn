@@ -21,6 +21,7 @@ Name = "Wooden Floor"
 Description = "wfloor"
 MaxStackSize = 1000
 StackSize = 1
+SlotType = 0
 Rarity = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sehdc"]
@@ -34,6 +35,7 @@ Name = "Wood"
 Description = "Wood "
 MaxStackSize = 1000
 StackSize = 1
+SlotType = 1
 Rarity = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_scg22"]
@@ -47,6 +49,7 @@ Name = "Stone"
 Description = "Stone"
 MaxStackSize = 1000
 StackSize = 1
+SlotType = 3
 Rarity = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmpks"]

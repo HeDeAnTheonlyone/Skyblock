@@ -21,6 +21,7 @@ GameManager="*res://Scripts/GameManager.cs"
 
 [display]
 
+window/size/initial_position_type=0
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
