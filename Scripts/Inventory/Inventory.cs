@@ -7,7 +7,6 @@ public abstract partial class Inventory : CanvasLayer
 {
 	public virtual InventoryData Data { get; set; }
 	protected GridContainer itemGrid;
-	private readonly PackedScene invItem = GD.Load("res://Objects/Inventory/InventoryItem.tscn") as PackedScene;
 
 
 
@@ -22,6 +21,7 @@ public abstract partial class Inventory : CanvasLayer
 			GD.PrintErr($"Node '{GetPath()}' has no Inventory resource!");
 
 		GetSlots();
+
 		Visible = false;
 	}
 
@@ -30,7 +30,6 @@ public abstract partial class Inventory : CanvasLayer
 	private bool CheckInventoryData() => IsDataNull();
     protected virtual bool IsDataNull() => Data == null;
 	protected virtual InventoryData GetData() => Data;
-
 
 
 	protected abstract void GetSlotParentNodes();
@@ -43,6 +42,7 @@ public abstract partial class Inventory : CanvasLayer
 
     public virtual void Open()
 	{
+		GetData().UpdateInventoryItems();
 		GetTree().Paused = true;
 		Visible = true;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -55,44 +55,5 @@ public abstract partial class Inventory : CanvasLayer
 		GetTree().Paused = false;
 		Visible = false;
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
-	}
-
-
-
-	public virtual void DisplayItemsInSlots(Slot[] slots, ItemData[] items)
-	{
-		for (int i = 0; i < items.Length; i++)
-		{
-			if (items[i] == null)
-			{
-				if (slots[i].GetChildCount() > 1)
-					slots[i].GetNode<InventoryItem>("InventoryItem").QueueFree();
-
-				continue;
-			}
-
-			if (slots[i].GetChildCount() > 1)
-			{
-				InventoryItem item = slots[i].GetNode<InventoryItem>("InventoryItem");
-
-				if (item.Data != items[i])
-				{
-					item.QueueFree();
-					DisplayItemsInSlotsInstantiastor(slots[i], items[i]);
-				}
-			}
-			else
-				DisplayItemsInSlotsInstantiastor(slots[i], items[i]);
-		}
-	}
-
-
-
-	protected virtual void DisplayItemsInSlotsInstantiastor(Slot slot, ItemData item)
-	{
-		InventoryItem invItemInstance = invItem.Instantiate() as InventoryItem;
-		invItemInstance.Data = item;
-		invItemInstance.inventory = GetData();
-		slot.AddChild(invItemInstance);
 	}
 }

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemMaterialData" load_steps=4 format=3 uid="uid://cs6qqx0e2px2v"]
+
+[ext_resource type="Texture2D" uid="uid://ba2pv65vcb265" path="res://Assets/Items/Materials.png" id="1_cxtt6"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="1_po5jd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67i2o"]
+atlas = ExtResource("1_cxtt6")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_po5jd")
+Texture = SubResource("AtlasTexture_67i2o")
+Name = "Wood"
+Description = "Can be gathered from trees"
+MaxStackSize = 1000
+StackSize = 1
+SlotType = 0
+Rarity = 0

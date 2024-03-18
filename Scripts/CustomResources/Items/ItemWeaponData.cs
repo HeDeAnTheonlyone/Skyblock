@@ -5,7 +5,7 @@ using Godot;
 [GlobalClass, Icon("")]
 public partial class ItemWeaponData : ItemData
 {
-    public ItemWeaponData()
+    public ItemWeaponData() : base()
     {
         MaxStackSize = 1;
     }

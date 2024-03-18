@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemMaterialData" load_steps=4 format=3 uid="uid://bvm3o5joet4kx"]
+
+[ext_resource type="Texture2D" uid="uid://ba2pv65vcb265" path="res://Assets/Items/Materials.png" id="1_aio84"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="1_akg7h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78nf2"]
+atlas = ExtResource("1_aio84")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_akg7h")
+Texture = SubResource("AtlasTexture_78nf2")
+Name = "Stone"
+Description = "Can be gathered from rocks"
+MaxStackSize = 1000
+StackSize = 1
+SlotType = 0
+Rarity = 0

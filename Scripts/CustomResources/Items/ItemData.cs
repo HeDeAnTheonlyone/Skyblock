@@ -12,14 +12,27 @@ public abstract partial class ItemData : Resource
     [ExportSubgroup("Properties")]
     [Export] public string Name { get; set; }
     [Export] public string Description { get; set; }
-    [Export] public virtual int MaxStackSize { get; set; }
-    [Export] public int StackSize { get; set; }
+    [Export] public int MaxStackSize { get; set; }
+    private int stackSize;
+    [Export] public int StackSize
+    {
+        get => stackSize;
+        set
+        {
+            stackSize = Mathf.Clamp(value, 0, MaxStackSize);
+            EmitSignal(SignalName.UpdateStackSize, stackSize);
+        }
+    }
+
     [Export] public Slot.SlotTypes SlotType { get; set; }
     [Export] public ItemRarity Rarity { get; set; }
 
 
 
-    public ItemData() {}
+    public ItemData()
+    {
+        StackSize = 1;
+    }
 
 
 
@@ -30,6 +43,10 @@ public abstract partial class ItemData : Resource
         Description = description;
         MaxStackSize = maxStackSize;
     }
+
+
+
+    [Signal] public delegate void UpdateStackSizeEventHandler(int value);
 
 
 

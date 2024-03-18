@@ -17,6 +17,8 @@ public partial class GameManager : Node
 
         ///
 
+        Engine.MaxFps = 300;
+
         if (Instance == null)
         {
             Instance = this;

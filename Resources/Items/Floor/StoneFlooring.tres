@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemPlacableData" load_steps=4 format=3 uid="uid://51ds64xgl4t5"]
+
+[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_2ajwj"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_3u3ou"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmlhv"]
+atlas = ExtResource("1_2ajwj")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_3u3ou")
+Texture = SubResource("AtlasTexture_vmlhv")
+Name = "Stone Flooring"
+Description = "Floor made out of stones"
+MaxStackSize = 1000
+StackSize = 1
+SlotType = 0
+Rarity = 0

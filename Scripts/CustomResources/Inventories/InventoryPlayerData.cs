@@ -18,6 +18,20 @@ public partial class InventoryPlayerData : InventoryData
 
 
 
+    #region Update items in inventory
+    public override void UpdateInventoryItems()
+    {
+        base.UpdateInventoryItems();
+        UpdateInventoryItemsInternal(ArmorSlots, Armor);
+    }
+
+
+
+    public override InventoryData GetInventoryData() => this;
+    #endregion
+
+
+
     public override void MoveItem(InventoryItem item)
     {
         if (!MoveItemInternal(item, ItemSlots))

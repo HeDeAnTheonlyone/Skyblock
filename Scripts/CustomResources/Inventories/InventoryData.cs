@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 
 
@@ -6,8 +8,58 @@ using Godot;
 public abstract partial class InventoryData : Resource
 {
     [ExportGroup("Properties")]
-    [Export] public virtual ItemData[] Items { get; set; }
+    [Export] public ItemData[] Items { get; set; }
     public Slot[] ItemSlots { get; set; }
+    protected readonly PackedScene invItem = GD.Load("res://Objects/Inventory/InventoryItem.tscn") as PackedScene;
+
+
+
+    #region Update items in inventory
+    public virtual void UpdateInventoryItems() => UpdateInventoryItemsInternal(ItemSlots, Items);
+
+
+
+    protected void UpdateInventoryItemsInternal(Slot[] slots, ItemData[] items)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+            {
+                if (slots[i].GetChildCount() > 1)
+                    slots[i].GetNode<InventoryItem>("InventoryItem").QueueFree();
+
+                continue;
+            }
+
+            if (slots[i].GetChildCount() > 1)
+            {
+                InventoryItem item = slots[i].GetNode<InventoryItem>("InventoryItem");
+
+                if (item.Data != items[i])
+                {
+                    item.QueueFree();
+                    UpdateInventoryItemsInstantiastor(slots[i], items[i]);
+                }
+            }
+            else
+                UpdateInventoryItemsInstantiastor(slots[i], items[i]);
+        }
+    }
+
+
+
+    private void UpdateInventoryItemsInstantiastor(Slot slot, ItemData item)
+    {
+        InventoryItem invItemInstance = invItem.Instantiate() as InventoryItem;
+        invItemInstance.Data = item;
+        invItemInstance.inventory = GetInventoryData();
+        slot.AddChild(invItemInstance);
+    }
+
+
+
+    public virtual InventoryData GetInventoryData() => this;
+    #endregion
 
 
 
@@ -17,7 +69,7 @@ public abstract partial class InventoryData : Resource
 
     protected bool MoveItemInternal(InventoryItem item, Slot[] slots)
     {
-        Rect2 itemCenter = new Rect2(item.GlobalPosition + item.Size / 2, Vector2.Zero);
+        Rect2 itemCenter = new Rect2(item.GlobalPosition + item.Size / 2, 25, 25);
         Slot oldSlot = item.GetParent<Slot>();
 
         foreach (Slot slot in slots)
@@ -51,8 +103,34 @@ public abstract partial class InventoryData : Resource
 
 
 
-    public void AddItems(params ItemData[] items)
+    public void AddItems(params ItemData[] newItems)
     {
-        // TODO
+        foreach (ItemData newItem in newItems)
+        {
+            ItemData[] itemStacks = Items.Where(item => item != null && item.Name == newItem.Name && item.StackSize < item.MaxStackSize).ToArray();
+
+            int index = 0;
+            while(newItem.StackSize > 0 && index < itemStacks.Length)
+            {
+                int stackSpace = Mathf.Clamp(itemStacks[index].MaxStackSize - itemStacks[index].StackSize, 0, newItem.StackSize);
+
+                itemStacks[index].StackSize += stackSpace;
+                newItem.StackSize -= stackSpace;
+
+                index++;
+            }
+
+            if (newItem.StackSize == 0)
+                continue;
+
+            int emptySlotIndex = Array.IndexOf(Items, null);
+            
+            if (emptySlotIndex == -1)
+                continue; //TODO If no empty slots in the Inventory. Not yet implemented to drop the items.
+            else
+                        Items[emptySlotIndex] = newItem;
+        }
+
+        UpdateInventoryItems();
     }
 }

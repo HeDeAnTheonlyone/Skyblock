@@ -1,56 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://cdsj51bbxcsu3"]
+[gd_scene load_steps=34 format=3 uid="uid://cdsj51bbxcsu3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_4urdj"]
 [ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="2_5mg7w"]
-[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_p2ssh"]
-[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="2_u7oh2"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="2_p20tq"]
 [ext_resource type="PackedScene" uid="uid://cbr1ev3c15aw8" path="res://Objects/Player/PlayerCam.tscn" id="3_i0s1y"]
-[ext_resource type="Texture2D" uid="uid://ba2pv65vcb265" path="res://Assets/Items/Materials.png" id="4_5qep4"]
-[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="4_u40pq"]
 [ext_resource type="PackedScene" uid="uid://csqgdeqopf83n" path="res://Objects/Player/PreviewCursor.tscn" id="4_yqlwi"]
 [ext_resource type="PackedScene" uid="uid://cmpbqhy6776dh" path="res://Objects/Inventory/PlayerInventory.tscn" id="5_1yia4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dw7eq"]
-atlas = ExtResource("2_u7oh2")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_2817j"]
-script = ExtResource("2_p2ssh")
-Texture = SubResource("AtlasTexture_dw7eq")
-Name = "Wooden Floor"
-Description = "wfloor"
-MaxStackSize = 1000
-StackSize = 1
-SlotType = 0
-Rarity = 0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sehdc"]
-atlas = ExtResource("4_5qep4")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_e0840"]
-script = ExtResource("4_u40pq")
-Texture = SubResource("AtlasTexture_sehdc")
-Name = "Wood"
-Description = "Wood "
-MaxStackSize = 1000
-StackSize = 1
-SlotType = 1
-Rarity = 0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_scg22"]
-atlas = ExtResource("4_5qep4")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_arvyh"]
-script = ExtResource("4_u40pq")
-Texture = SubResource("AtlasTexture_scg22")
-Name = "Stone"
-Description = "Stone"
-MaxStackSize = 1000
-StackSize = 1
-SlotType = 3
-Rarity = 0
+[ext_resource type="Script" path="res://Scripts/CustomResources/LootTable.cs" id="8_dpxyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmpks"]
 atlas = ExtResource("2_5mg7w")
@@ -193,6 +149,45 @@ size = Vector2(12, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0gu3"]
 size = Vector2(8, 3)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8t0io"]
+load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76inh"]
+atlas = SubResource("CompressedTexture2D_8t0io")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_77dmk"]
+script = ExtResource("2_p20tq")
+Texture = SubResource("AtlasTexture_76inh")
+Name = "Stone"
+Description = "Can be gathered from rocks"
+MaxStackSize = 1000
+StackSize = 100
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2pnks"]
+load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hsqq"]
+atlas = SubResource("CompressedTexture2D_2pnks")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_331j0"]
+script = ExtResource("2_p20tq")
+Texture = SubResource("AtlasTexture_7hsqq")
+Name = "Wood"
+Description = "Can be gathered from trees"
+MaxStackSize = 1000
+StackSize = 80
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="Resource" id="Resource_qhmgl"]
+script = ExtResource("8_dpxyh")
+Table = Array[Object]([SubResource("Resource_77dmk"), SubResource("Resource_331j0")])
+Rolls = 0
+
 [node name="Player" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -200,7 +195,6 @@ gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_4urdj")
 MoveSpeed = 1.0
-testItems = Array[Object]([SubResource("Resource_2817j"), SubResource("Resource_e0840"), SubResource("Resource_arvyh"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
@@ -227,6 +221,7 @@ offset = Vector2(0, -16)
 zoom = Vector2(3.5, 3.5)
 
 [node name="PlayerInventory" parent="." instance=ExtResource("5_1yia4")]
+TestTable = SubResource("Resource_qhmgl")
 
 [node name="Hud" type="CanvasLayer" parent="."]
 

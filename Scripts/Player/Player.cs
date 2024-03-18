@@ -11,16 +11,10 @@ public partial class Player : RigidBody2D
 
 
 
-	[Export] public ItemData[] testItems;
-
-
-
 	public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite2D>("Sprite");	
 		inventory = GetNode<PlayerInventory>("PlayerInventory");
-
-		inventory.Data.Items = testItems;
 	}
 
 

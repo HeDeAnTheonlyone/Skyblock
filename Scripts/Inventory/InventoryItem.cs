@@ -7,6 +7,7 @@ public partial class InventoryItem : Control
     [Export] public ItemData Data { get; set; }
     public InventoryData inventory;
     private TextureRect sprite;
+    private Label counter;
     private bool followCursor = false;
     private int prevZIndex;
 
@@ -15,7 +16,10 @@ public partial class InventoryItem : Control
     public override void _Ready()
     {
         sprite = GetNode<TextureRect>("Sprite");
-        
+        counter = GetNode<Label>("Counter"); 
+        SetCounter(Data.StackSize);
+        Data.UpdateStackSize += SetCounter;
+
         if (Data.Texture != null)
             if(Data.Texture.Atlas != null)
                 sprite.Texture = Data.Texture;
@@ -69,4 +73,8 @@ public partial class InventoryItem : Control
 
 
     private void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
+
+
+
+    private void SetCounter(int stackSize) => counter.Text = stackSize.ToString(); 
 }

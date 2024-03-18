@@ -6,6 +6,7 @@ using Godot;
 public partial class PlayerInventory : Inventory
 {
 	[Export] public new InventoryPlayerData Data { get; private set; } = new InventoryPlayerData();
+	[Export] public LootTable TestTable;
 	private VBoxContainer armorList;
 
 
@@ -13,12 +14,13 @@ public partial class PlayerInventory : Inventory
 	public override void _Ready()
 	{
 		base._Ready();
+		GD.Print(TestTable);
 	}
 
 
 
 	protected override bool IsDataNull() => Data == null;
-    protected override InventoryData GetData() => Data;
+	protected override InventoryData GetData() => Data;
 
 
 
@@ -47,14 +49,24 @@ public partial class PlayerInventory : Inventory
 			else
 				Open();
         }
-	}
 
+		// TODO Remove temporary inputs
+		if (Input.IsActionJustPressed("Space"))
+        {
+			GD.Print("Add Item");
+			Data.AddItems(TestTable.PlainLoot());
+        }
 
+		if (Input.IsPhysicalKeyPressed(Key.Backspace))
+        {
+			foreach (ItemData item in Data.Items)
+			{
+				if (item == null)
+					continue;
 
-	public override void Open()
-	{
-		base.Open();
-		DisplayItemsInSlots(Data.ItemSlots, Data.Items);
-		DisplayItemsInSlots(Data.ArmorSlots, Data.Armor);
-	}
+				GD.Print(item.Name + "   " + item.StackSize + "/" + item.MaxStackSize);
+			}
+        }
+		//
+    }
 }
