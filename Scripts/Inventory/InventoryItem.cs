@@ -30,6 +30,9 @@ public partial class InventoryItem : Control
     }
 
 
+    public override void _ExitTree() => Data.UpdateStackSize -= SetCounter;
+
+
 
     private void LoadErrorTexture()
     {
