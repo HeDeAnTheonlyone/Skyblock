@@ -34,7 +34,7 @@ public partial class InventoryPlayerData : InventoryData
 
     public override void MoveItem(InventoryItem item)
     {
-        if (!MoveItemInternal(item, ItemSlots))
-            MoveItemInternal(item, ArmorSlots);
+        if (!MoveItemInternal(item, ItemSlots, Items))
+            MoveItemInternal(item, ArmorSlots, Armor);
     }
 }

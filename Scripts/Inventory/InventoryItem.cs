@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 
@@ -17,8 +18,8 @@ public partial class InventoryItem : Control
     {
         sprite = GetNode<TextureRect>("Sprite");
         counter = GetNode<Label>("Counter"); 
-        SetCounter(Data.StackSize);
-        Data.UpdateStackSize += SetCounter;
+        UpdateCounter(Data.StackSize);
+        Data.UpdateStackSize += UpdateCounter;
 
         if (Data.Texture != null)
             if(Data.Texture.Atlas != null)
@@ -30,7 +31,8 @@ public partial class InventoryItem : Control
     }
 
 
-    public override void _ExitTree() => Data.UpdateStackSize -= SetCounter;
+
+    public override void _ExitTree() => Data.UpdateStackSize -= UpdateCounter;
 
 
 
@@ -64,20 +66,37 @@ public partial class InventoryItem : Control
             followCursor = true;
         }
 
-        if (@event.IsActionReleased("LeftClick"))
+            if (@event.IsActionReleased("LeftClick"))
         {
+            GD.Print("Test");
             followCursor = false;
             ZIndex = prevZIndex;
             inventory.MoveItem(this);
-            CenterInSlot();
+        }
+
+            if (@event.IsActionPressed("RightClick") && followCursor)
+        {
+            inventory.SplitItem(this, 1);
+        }
+
+        if (@event.IsActionPressed("ShiftRightClick") && followCursor)
+        {
+            inventory.SplitItem(this, Data.StackSize / 2);
         }
     }
 
 
 
-    private void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
+    public void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
 
 
 
-    private void SetCounter(int stackSize) => counter.Text = stackSize.ToString(); 
+    private void UpdateCounter(int stackSize)
+    {
+        if (stackSize < 1)
+            QueueFree();
+
+        counter.Text = stackSize.ToString();
+    }
+
 }

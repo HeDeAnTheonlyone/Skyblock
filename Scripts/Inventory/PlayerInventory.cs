@@ -53,8 +53,8 @@ public partial class PlayerInventory : Inventory
 		// TODO Remove temporary inputs
 		if (Input.IsActionJustPressed("Space"))
         {
-			GD.Print("Add Item");
-			Data.AddItems(TestTable.PlainLoot());
+			GD.Print("Add test items");
+			Data.AddItem(TestTable.PlainLoot());
         }
 
 		if (Input.IsPhysicalKeyPressed(Key.Backspace))

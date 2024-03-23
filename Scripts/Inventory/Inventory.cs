@@ -18,7 +18,9 @@ public abstract partial class Inventory : CanvasLayer
 			throw new FieldIsNullException($"No reference to an itemgrid in '{GetPath()}'!");
 
 		if (CheckInventoryData())
-			GD.PrintErr($"Node '{GetPath()}' has no Inventory resource!");
+			throw new FieldIsNullException($"Node '{GetPath()}' has no Inventory resource!");
+
+		//GetData().SetItemBufferNode(GetNode<Control>("ItemBuffer"));
 
 		GetSlots();
 

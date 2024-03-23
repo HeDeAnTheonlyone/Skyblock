@@ -20,7 +20,7 @@ public abstract partial class ItemData : Resource
         set
         {
             stackSize = Mathf.Clamp(value, 0, MaxStackSize);
-            EmitSignal(SignalName.UpdateStackSize, stackSize);
+            EmitSignal(SignalName.UpdateStackSize, stackSize);   
         }
     }
 
@@ -43,6 +43,10 @@ public abstract partial class ItemData : Resource
         Description = description;
         MaxStackSize = maxStackSize;
     }
+
+
+
+    public bool CanMergeWith(ItemData item) => item.Name == Name && StackSize < MaxStackSize;
 
 
 
