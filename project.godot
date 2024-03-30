@@ -152,6 +152,7 @@ Space={
 
 2d_physics/layer_1="Ground"
 2d_physics/layer_2="Decoration"
+2d_physics/layer_3="Items"
 
 [physics]
 

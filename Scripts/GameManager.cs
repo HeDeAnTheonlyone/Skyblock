@@ -17,7 +17,7 @@ public partial class GameManager : Node
 
         ///
 
-        Engine.MaxFps = 300;
+        Engine.MaxFps = (int)DisplayServer.ScreenGetRefreshRate(DisplayServer.GetPrimaryScreen()) + 20;
 
         if (Instance == null)
         {

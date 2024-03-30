@@ -53,8 +53,8 @@ public partial class ItemPlacableData : ItemData
         {
             TextureCoordinates = TextureCoordinates with
             {
-                X = (int)Texture.Region.Position.X / 16,
-                Y = (int)Texture.Region.Position.Y / 16
+                X = ((int)Texture.Region.Position.X - 1) / 18,
+                Y = ((int)Texture.Region.Position.Y - 1) / 18
             };
         }
 

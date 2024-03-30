@@ -4,7 +4,7 @@ using Godot;
 
 
 
-[GlobalClass]
+[GlobalClass, Icon("res://Assets/Icons/Inventory.svg")]
 public abstract partial class InventoryData : Resource
 {
     [ExportGroup("Properties")]
@@ -98,10 +98,7 @@ public abstract partial class InventoryData : Resource
             ItemData occupyingItem = itemList[slot.GetIndex()];
 
             if (ReferenceEquals(item.Data, occupyingItem))
-            {
-                item.CenterInSlot();
                 return true;
-            }
 
             if (occupyingItem.CanMergeWith(item.Data))
             {
@@ -155,7 +152,7 @@ public abstract partial class InventoryData : Resource
 
 
     /// <summary>
-    /// Adds a variable amount of differnt items. It fills the inventory up from the top left to the bottom right.
+    /// Adds a variable amount of differnt items only to the main item list of the inventory. It fills the inventory up from the top left to the bottom right.
     /// </summary>
     /// <param name="newItems"></param>
     public void AddItem(params ItemData[] newItems)
@@ -165,7 +162,7 @@ public abstract partial class InventoryData : Resource
             ItemData[] itemStacks = Items.Where(item => item != null && item.CanMergeWith(newItem)).ToArray();
 
             int index = 0;
-            while(newItem.StackSize > 0 && index < itemStacks.Length)
+            while (newItem.StackSize > 0 && index < itemStacks.Length)
             {
                 int stackSize = Mathf.Clamp(itemStacks[index].MaxStackSize - itemStacks[index].StackSize, 0, newItem.StackSize);
 
@@ -175,15 +172,18 @@ public abstract partial class InventoryData : Resource
                 index++;
             }
 
-            if (newItem.StackSize == 0)
+            if (newItem.StackSize < 1)
                 continue;
 
             int emptySlotIndex = Array.IndexOf(Items, null);
-            
+
             if (emptySlotIndex == -1)
-                continue; //TODO If no empty slots in the Inventory. Not yet implemented to drop the items.
+                continue;
             else
-                Items[emptySlotIndex] = newItem;
+            {
+                Items[emptySlotIndex] = newItem.Duplicate(true) as ItemData;
+                newItem.StackSize = 0;
+            }
         }
 
         UpdateInventoryItems();

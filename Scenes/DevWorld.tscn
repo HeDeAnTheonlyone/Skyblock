@@ -1,7 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://0tw2ri76kbva"]
+[gd_scene load_steps=8 format=3 uid="uid://0tw2ri76kbva"]
 
 [ext_resource type="PackedScene" uid="uid://cwmo020cx751q" path="res://Objects/Grid.tscn" id="1_giwyk"]
 [ext_resource type="PackedScene" uid="uid://cdsj51bbxcsu3" path="res://Objects/Player/Player.tscn" id="1_vlo3o"]
+[ext_resource type="PackedScene" uid="uid://rjt738ui058t" path="res://Objects/InWorldItem.tscn" id="3_ft6xs"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="4_qfpno"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7idgj"]
+load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc0ep"]
+atlas = SubResource("CompressedTexture2D_7idgj")
+region = Rect2(19, 1, 16, 16)
+
+[sub_resource type="Resource" id="Resource_dhq0q"]
+script = ExtResource("4_qfpno")
+Texture = SubResource("AtlasTexture_tc0ep")
+Name = "Wood"
+Description = "Can be gathered from trees"
+MaxStackSize = 1000
+StackSize = 500
+SlotType = 0
+Rarity = 0
 
 [node name="DevWorld" type="Node2D"]
 
@@ -9,3 +28,7 @@
 layer_0/tile_data = PackedInt32Array(-2, 65537, 0, -1, 65537, 0, -65536, 65537, 0, -65535, 65537, 0, 1, 65537, 0, 0, 65537, 0, 65535, 65537, 0, 65534, 65537, 0, -65538, 131073, 0, -65537, 65537, 0, -131072, 65537, 0, -131071, 131073, 0, 131070, 131073, 0, 131071, 65537, 0, 65536, 65537, 0, 65537, 131073, 0, 196604, 196609, 0, 196605, 196609, 0, 196606, 131073, 0, 196607, 131073, 0, 131072, 131073, 0, 131073, 131073, 0, 65538, 131073, 0, 131069, 131073, 0, 65532, 196609, 0, 65533, 131073, 0, -3, 131073, 0, -65539, 131073, 0, -131075, 196609, 0, -131074, 131073, 0, -131073, 131073, 0, -196608, 131073, 0, -196607, 131073, 0, -131070, 131073, 0, -65534, 131073, 0, 2, 131073, 0, 262141, 196609, 0, 262142, 196609, 0, 262143, 196609, 0, 196608, 196609, 0, 196609, 196609, 0, 196610, 196609, 0, 131075, 196609, 0, -196605, 196609, 0, -196606, 196609, 0, -262142, 196609, 0, -262143, 196609, 0, -262144, 196609, 0, -196609, 196609, 0, -196610, 196609, 0, -196611, 196609, 0, -131076, 196609, 0, -65540, 196609, 0, -4, 196609, 0, 131068, 196609, 0, 131074, 196609, 0, -131069, 196609, 0, -65533, 196609, 0, 3, 196609, 0, 65539, 196609, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_vlo3o")]
+
+[node name="InWorldItem" parent="." instance=ExtResource("3_ft6xs")]
+position = Vector2(-46, 0)
+Data = SubResource("Resource_dhq0q")

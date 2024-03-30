@@ -13,5 +13,30 @@ public partial class InWorldItem : Node2D
     {
         sprite = GetNode<Sprite2D>("Sprite");
         sprite.Texture = Data.Texture;
+        Data.UpdateStackSize += DeleteOnItemStackEmpty;
     }
+
+
+
+    public override void _ExitTree() => Data.UpdateStackSize -= DeleteOnItemStackEmpty;
+
+
+
+    private void CollectItem(Node2D body)
+    {
+        Player player = body as Player;
+        
+        if (player != null)
+            player.CollectItem(Data);
+    }
+
+
+
+    #region Signals
+    private void DeleteOnItemStackEmpty(int stackSize)
+    {
+        if (stackSize < 1)
+            QueueFree();
+    }
+    #endregion
 }

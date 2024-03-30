@@ -2,7 +2,7 @@ using Godot;
 
 
 
-[GlobalClass]
+[GlobalClass, Icon("res://Assets/Icons/Inventory.svg")]
 public partial class InventoryPlayerData : InventoryData
 {
     [ExportGroup("Properties")]

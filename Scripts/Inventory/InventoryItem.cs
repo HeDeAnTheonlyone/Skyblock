@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 
@@ -42,7 +41,7 @@ public partial class InventoryItem : Control
         AtlasTexture errTex = new AtlasTexture
         {
             Atlas = GD.Load<Texture2D>("res://Assets/Items/Debug.png"),
-            Region = new Rect2(Vector2.Zero, 16, 16)
+            Region = new Rect2(1, 1 , 16, 16)
         };
         sprite.Texture = errTex;
     }
@@ -66,15 +65,15 @@ public partial class InventoryItem : Control
             followCursor = true;
         }
 
-            if (@event.IsActionReleased("LeftClick"))
+        if (@event.IsActionReleased("LeftClick"))
         {
-            GD.Print("Test");
             followCursor = false;
             ZIndex = prevZIndex;
             inventory.MoveItem(this);
+            CenterInSlot();
         }
 
-            if (@event.IsActionPressed("RightClick") && followCursor)
+        if (@event.IsActionPressed("RightClick") && followCursor)
         {
             inventory.SplitItem(this, 1);
         }
@@ -87,7 +86,7 @@ public partial class InventoryItem : Control
 
 
 
-    public void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
+    private void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
 
 
 

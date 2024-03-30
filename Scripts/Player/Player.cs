@@ -68,6 +68,10 @@ public partial class Player : RigidBody2D
 
 
 
+	public void CollectItem(ItemData item) => inventory.Data.AddItem(item);
+
+
+
 	#region Signals
 	private void Death(Node body)
 	{

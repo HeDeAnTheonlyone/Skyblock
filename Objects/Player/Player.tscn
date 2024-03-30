@@ -149,47 +149,47 @@ size = Vector2(12, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0gu3"]
 size = Vector2(8, 3)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8t0io"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_731pu"]
 load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_76inh"]
-atlas = SubResource("CompressedTexture2D_8t0io")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tghhk"]
+atlas = SubResource("CompressedTexture2D_731pu")
+region = Rect2(19, 1, 16, 16)
 
-[sub_resource type="Resource" id="Resource_77dmk"]
+[sub_resource type="Resource" id="Resource_5jbb2"]
 script = ExtResource("2_p20tq")
-Texture = SubResource("AtlasTexture_76inh")
-Name = "Stone"
-Description = "Can be gathered from rocks"
-MaxStackSize = 1000
-StackSize = 100
-SlotType = 0
-Rarity = 0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2pnks"]
-load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7hsqq"]
-atlas = SubResource("CompressedTexture2D_2pnks")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_331j0"]
-script = ExtResource("2_p20tq")
-Texture = SubResource("AtlasTexture_7hsqq")
+Texture = SubResource("AtlasTexture_tghhk")
 Name = "Wood"
 Description = "Can be gathered from trees"
 MaxStackSize = 1000
-StackSize = 80
+StackSize = 900
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q0ol7"]
+load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s07h"]
+atlas = SubResource("CompressedTexture2D_q0ol7")
+region = Rect2(19, 1, 16, 16)
+
+[sub_resource type="Resource" id="Resource_mpjvk"]
+script = ExtResource("2_p20tq")
+Texture = SubResource("AtlasTexture_5s07h")
+Name = "Wood"
+Description = "Can be gathered from trees"
+MaxStackSize = 1000
+StackSize = 800
 SlotType = 0
 Rarity = 0
 
 [sub_resource type="Resource" id="Resource_qhmgl"]
 script = ExtResource("8_dpxyh")
-Table = Array[Object]([SubResource("Resource_77dmk"), SubResource("Resource_331j0")])
+Table = Array[Object]([SubResource("Resource_5jbb2"), SubResource("Resource_mpjvk")])
 Rolls = 0
 
 [node name="Player" type="RigidBody2D"]
-collision_layer = 2
+collision_layer = 6
 collision_mask = 2
 gravity_scale = 0.0
 lock_rotation = true
