@@ -10,11 +10,12 @@ load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aee
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tc0ep"]
 atlas = SubResource("CompressedTexture2D_7idgj")
-region = Rect2(19, 1, 16, 16)
+region = Rect2(17, 0, 16, 16)
 
 [sub_resource type="Resource" id="Resource_dhq0q"]
 script = ExtResource("4_qfpno")
 Texture = SubResource("AtlasTexture_tc0ep")
+Frames = 1
 Name = "Wood"
 Description = "Can be gathered from trees"
 MaxStackSize = 1000
@@ -30,5 +31,5 @@ layer_0/tile_data = PackedInt32Array(-2, 65537, 0, -1, 65537, 0, -65536, 65537, 
 [node name="Player" parent="." instance=ExtResource("1_vlo3o")]
 
 [node name="InWorldItem" parent="." instance=ExtResource("3_ft6xs")]
-position = Vector2(-46, 0)
+position = Vector2(-42, 0)
 Data = SubResource("Resource_dhq0q")

@@ -3,7 +3,7 @@ using Godot;
 
 
 
-public abstract partial class Inventory : CanvasLayer
+public abstract partial class Inventory : Control
 {
 	public virtual InventoryData Data { get; set; }
 	protected GridContainer itemGrid;

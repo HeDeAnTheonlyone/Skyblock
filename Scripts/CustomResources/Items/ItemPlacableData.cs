@@ -45,16 +45,16 @@ public partial class ItemPlacableData : ItemData
         {
             TextureCoordinates = TextureCoordinates with
             {
-                X = (int)Texture.Region.Position.X / GameManager.Instance.SingleTileSize,
-                Y = (int)Texture.Region.Position.Y / GameManager.Instance.SingleTileSize
+                X = (int)Texture.Region.Position.X / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet),
+                Y = (int)Texture.Region.Position.Y / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet)
             };
         }
         catch
         {
             TextureCoordinates = TextureCoordinates with
             {
-                X = ((int)Texture.Region.Position.X - 1) / 18,
-                Y = ((int)Texture.Region.Position.Y - 1) / 18
+                X = (int)Texture.Region.Position.X / 17,
+                Y = (int)Texture.Region.Position.Y / 17
             };
         }
 

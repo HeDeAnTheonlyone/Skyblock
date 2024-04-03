@@ -8,8 +8,7 @@ friction = 0.0
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mc2r"]
 resource_name = "Ground"
 texture = ExtResource("1_ys7gk")
-margins = Vector2i(1, 1)
-separation = Vector2i(2, 2)
+separation = Vector2i(1, 1)
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0

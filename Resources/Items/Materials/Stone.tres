@@ -5,11 +5,12 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_78nf2"]
 atlas = ExtResource("1_aio84")
-region = Rect2(37, 1, 16, 16)
+region = Rect2(34, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_akg7h")
 Texture = SubResource("AtlasTexture_78nf2")
+Frames = 0
 Name = "Stone"
 Description = "Can be gathered from rocks"
 MaxStackSize = 1000

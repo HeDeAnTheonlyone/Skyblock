@@ -5,12 +5,12 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmlhv"]
 atlas = ExtResource("1_v0lnv")
-region = Rect2(19, 1, 16, 16)
+region = Rect2(17, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_5mkov")
-TextureCoordinates = Vector2i(1, 0)
 Texture = SubResource("AtlasTexture_vmlhv")
+Frames = 1
 Name = "Planks Flooring"
 Description = "Floor made out of wood"
 MaxStackSize = 1000

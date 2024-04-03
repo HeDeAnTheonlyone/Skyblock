@@ -3,18 +3,20 @@
 [ext_resource type="Script" path="res://Scripts/InWorldItem.cs" id="1_ekl8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_580o0"]
+size = Vector2(12, 12)
 
 [node name="InWorldItem" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_ekl8h")
 
-[node name="Area" type="Area2D" parent="."]
+[node name="CollectArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="Hitbox" type="CollisionShape2D" parent="Area"]
+[node name="Hitbox" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("RectangleShape2D_580o0")
 debug_color = Color(0, 0.803922, 0.396078, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 
-[connection signal="body_entered" from="Area" to="." method="CollectItem"]
+[connection signal="body_entered" from="CollectArea" to="." method="CollectItem"]

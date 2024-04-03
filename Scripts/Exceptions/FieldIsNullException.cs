@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 
 
 #nullable enable
@@ -8,7 +7,7 @@ using System.Runtime.Serialization;
 /// <summary>
 /// The exception that is thrown when a fiel is null when it should have a value at this point.
 /// </summary>
-public partial class FieldIsNullException : Exception, ISerializable
+public partial class FieldIsNullException : Exception
 {
     public FieldIsNullException() : base() {}
 

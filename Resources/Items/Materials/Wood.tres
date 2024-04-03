@@ -5,14 +5,15 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_67i2o"]
 atlas = ExtResource("1_cxtt6")
-region = Rect2(19, 1, 16, 16)
+region = Rect2(17, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_po5jd")
 Texture = SubResource("AtlasTexture_67i2o")
+Frames = 1
 Name = "Wood"
 Description = "Can be gathered from trees"
 MaxStackSize = 1000
-StackSize = 1
+StackSize = 0
 SlotType = 0
 Rarity = 0

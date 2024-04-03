@@ -8,6 +8,7 @@ public abstract partial class ItemData : Resource
     [ExportGroup("Item")]
     [ExportSubgroup("Texture")]
     [Export] public virtual AtlasTexture Texture { get; set; }
+    [Export] public int Frames { get; set; } = 1;
     //
     [ExportSubgroup("Properties")]
     [Export] public string Name { get; set; }

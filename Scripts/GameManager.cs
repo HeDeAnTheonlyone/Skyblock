@@ -4,9 +4,9 @@ public partial class GameManager : Node
 {
     public static GameManager Instance { get; private set; }
     public string CurrentLevel { get; set; }
-    public Player player;
     public int SingleTileSize { get; } = 16;
-
+    public int TileOffSet { get; } = 1;
+    
 
 
     public override void _Ready()
