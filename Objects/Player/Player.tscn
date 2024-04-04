@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cdsj51bbxcsu3"]
+[gd_scene load_steps=35 format=3 uid="uid://cdsj51bbxcsu3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_4urdj"]
 [ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="2_5mg7w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cbr1ev3c15aw8" path="res://Objects/Player/PlayerCam.tscn" id="3_i0s1y"]
 [ext_resource type="PackedScene" uid="uid://csqgdeqopf83n" path="res://Objects/Player/PreviewCursor.tscn" id="4_yqlwi"]
 [ext_resource type="PackedScene" uid="uid://cmpbqhy6776dh" path="res://Objects/Inventory/PlayerInventory.tscn" id="5_1yia4"]
+[ext_resource type="PackedScene" uid="uid://bo22ap6jbvmkr" path="res://Objects/Inventory/HotBar.tscn" id="5_grw5b"]
 [ext_resource type="Script" path="res://Scripts/CustomResources/LootTable.cs" id="8_dpxyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmpks"]
@@ -218,13 +219,14 @@ shape = SubResource("RectangleShape2D_j0gu3")
 debug_color = Color(0.890196, 0, 0.0784314, 0.419608)
 
 [node name="PreviewCursor" parent="." instance=ExtResource("4_yqlwi")]
-visible = false
 
 [node name="PlayerCam" parent="." instance=ExtResource("3_i0s1y")]
 offset = Vector2(0, -16)
 zoom = Vector2(3.5, 3.5)
 
 [node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="HotBar" parent="Hud" instance=ExtResource("5_grw5b")]
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 

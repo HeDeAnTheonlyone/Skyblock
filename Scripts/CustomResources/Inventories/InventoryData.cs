@@ -8,8 +8,8 @@ using Godot;
 public abstract partial class InventoryData : Resource
 {
     [ExportGroup("Properties")]
-    [Export] public ItemData[] Items { get; set; }
-    public Slot[] ItemSlots { get; set; }
+    [Export] public ItemData[] Items { get; protected set; }
+    public Slot[] ItemSlots { get; protected set; }
     //private Control itemBuffer;
     protected readonly PackedScene invItem = GD.Load("res://Objects/Inventory/InventoryItem.tscn") as PackedScene;
 
@@ -31,6 +31,8 @@ public abstract partial class InventoryData : Resource
     //     itemBuffer.AddChild(item);
     //     item.Size = size;
     // }
+
+    protected void SetSlots(Slot[] itemSlots) => ItemSlots = itemSlots;
 
 
 

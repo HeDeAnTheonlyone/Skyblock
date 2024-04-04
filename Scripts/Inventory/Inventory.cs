@@ -1,11 +1,10 @@
-using System.Linq;
 using Godot;
 
 
 
 public abstract partial class Inventory : Control
 {
-	public virtual InventoryData Data { get; set; }
+	public InventoryData Data { get; protected set; }
 	protected GridContainer itemGrid;
 
 
@@ -22,7 +21,7 @@ public abstract partial class Inventory : Control
 
 		//GetData().SetItemBufferNode(GetNode<Control>("ItemBuffer"));
 
-		GetSlots();
+		SetSlots();
 
 		Visible = false;
 	}
@@ -34,11 +33,12 @@ public abstract partial class Inventory : Control
 	protected virtual InventoryData GetData() => Data;
 
 
+
 	protected abstract void GetSlotParentNodes();
 
 
 
-    protected virtual void GetSlots() => Data.ItemSlots = itemGrid.GetChildren().Cast<Slot>().ToArray();
+    protected abstract void SetSlots();
 
 
 
