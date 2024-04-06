@@ -21,7 +21,7 @@ public abstract partial class Inventory : Control
 
 		//GetData().SetItemBufferNode(GetNode<Control>("ItemBuffer"));
 
-		SetSlots();
+		SetSlotsAndValues();
 
 		Visible = false;
 	}
@@ -38,7 +38,7 @@ public abstract partial class Inventory : Control
 
 
 
-    protected abstract void SetSlots();
+    protected abstract void SetSlotsAndValues();
 
 
 

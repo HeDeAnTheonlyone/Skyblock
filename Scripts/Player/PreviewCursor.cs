@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Godot.NativeInterop;
 
 public partial class PreviewCursor : Node2D
 {
@@ -7,7 +8,6 @@ public partial class PreviewCursor : Node2D
 	private TileMap grid;
 	private Sprite2D highlighter;
 	private Sprite2D modeIcon;
-	public PackedScene placableObject;
 	private Vector2 mousePos;
 	private int gridSize;
 	private bool inCursorAnim;
@@ -22,7 +22,6 @@ public partial class PreviewCursor : Node2D
 			modeIcon.RegionRect = new Rect2((int)value * s, 0, s, s);
 		}
 	}
-
 
 
 
@@ -43,19 +42,20 @@ public partial class PreviewCursor : Node2D
 		modeIcon = GetNode<Sprite2D>("ModeIcon");
 		gridSize = GameManager.Instance.SingleTileSize;
 
-		// TileSetAtlasSource a = grid.TileSet.GetSource(1) as TileSetAtlasSource;
-		// a.UseTexturePadding = false;
-
-		// AtlasTexture b = new AtlasTexture();
-		// b.Atlas = a.Texture;
-		// b.Region = a.GetTileTextureRegion(new Vector2I(1,1));
-
 		Pulse();
     }
 
 
 
-    public override void _Input(InputEvent @event)
+	public override void _Process(double delta)
+	{
+		mousePos = GetGlobalMousePosition();
+		SnapToGrid();
+	}
+
+
+
+	public override void _Input(InputEvent @event)
     {
 		if (@event.IsActionPressed("TileInteract") && ownerPlayer.Alive)
 			TileInteraction();
@@ -74,13 +74,13 @@ public partial class PreviewCursor : Node2D
 
 	private void TileInteraction()
 	{
-		Vector2I placePos = (Vector2I)(mousePos - mousePos % gridSize) / gridSize;
+		Vector2I clickPos = (Vector2I)(mousePos - mousePos % gridSize) / gridSize;
 
 		if (mousePos.X < 0)
-			placePos.X -= 1;
+			clickPos.X -= 1;
 
 		if (mousePos.Y < 0)
-			placePos.Y -= 1;
+			clickPos.Y -= 1;
 
 		switch (Mode)
 		{
@@ -90,15 +90,19 @@ public partial class PreviewCursor : Node2D
 
 			case CursorMode.Build:
 				ModeIconAnim();
+				ItemData item = ownerPlayer.Inventory.Items[ownerPlayer.Inventory.Hotbar.Selected];
+
 				if (Input.IsActionPressed("LeftClick"))
 				{
-					grid.SetCell(1, placePos, 2, new Vector2I(1, 0));
+					if (item == null || !(item is ItemPlacableData))
+						return;
+					
+					PlaceBlock(item as ItemPlacableData, clickPos);
 				}
 
 				if (Input.IsActionPressed("RightClick"))
-				{
-					grid.SetCell(1, placePos, 2);
-				}
+					BreakBlock(clickPos);
+					
 				break;
 
 			case CursorMode.Break:
@@ -110,6 +114,34 @@ public partial class PreviewCursor : Node2D
 		}
 	}
 
+
+
+	private void PlaceBlock(ItemPlacableData item, Vector2I position)
+	{
+		if (grid.GetCellSourceId(item.PlaceLayer, position) != -1)
+			return;
+
+		grid.SetCell(item.PlaceLayer, position, item.PlaceLayer, item.TileCoordinates);
+		item.StackSize --;
+	}
+
+
+
+	private void BreakBlock(Vector2I position)
+	{
+		int layerCount = grid.GetLayersCount();
+
+		for (int i = layerCount - 1; i >= 0; i--)
+		{
+			if (grid.GetCellSourceId(i, position) == -1)
+				continue;
+
+			ItemPlacableData item = grid.GetCellTileData(i, position).GetCustomData("ItemData").AsGodotObject() as ItemPlacableData;
+			ownerPlayer.Inventory.AddItem(item.Duplicate(true) as ItemPlacableData);
+			grid.EraseCell(i, position);
+			return;
+		}
+	}
 
 
 	private void ModeIconAnim()
@@ -144,14 +176,6 @@ public partial class PreviewCursor : Node2D
 
 
 	private void OnCursorAnimFinished() => inCursorAnim = false;
-
-
-
-    public override void _Process(double delta)
-	{
-		mousePos = GetGlobalMousePosition();
-		SnapToGrid();
-	}
 
 
 

@@ -12,6 +12,7 @@ script = ExtResource("1_po5jd")
 Texture = SubResource("AtlasTexture_67i2o")
 Frames = 1
 Name = "Wood"
+Id = &"_:Wood"
 Description = "Can be gathered from trees"
 MaxStackSize = 1000
 StackSize = 0

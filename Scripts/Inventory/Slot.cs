@@ -23,17 +23,18 @@ public partial class Slot : AspectRatioContainer
     public enum SlotTypes
     {
         Item,
+        All,
         Helmet,
         ChestPlate,
         Leggins,
-        Fuel
+        Fuel,
     }
 
 
 
     public bool MatchType(SlotTypes type)
     {
-        if (SlotType == SlotTypes.Item)
+        if (type == SlotTypes.All || SlotType == SlotTypes.Item)
             return true;
 
         return SlotType == type;

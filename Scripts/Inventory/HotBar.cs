@@ -3,15 +3,15 @@ using System.Linq;
 
 
 
-public partial class HotBar : Control
+public partial class Hotbar : Control
 {
 	private HBoxContainer itemList;
 	private Panel selection;
 	private int selected = 0;
-	private int Selected
+	public int Selected
 	{ 
 		get => selected;
-		set
+		private set
 		{
 			selected = value;
 			
@@ -38,10 +38,10 @@ public partial class HotBar : Control
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("ScrollHotBarRight"))
+        if (@event.IsActionPressed("ScrollHotbarRight") && !Input.IsActionPressed("Alt"))
 			Selected ++;
         
-		if (@event.IsActionPressed("ScrollHotBarLeft"))
+		if (@event.IsActionPressed("ScrollHotbarLeft") && !Input.IsActionPressed("Alt"))
 			Selected --;
     }
 

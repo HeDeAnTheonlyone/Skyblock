@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo22ap6jbvmkr"]
 
-[ext_resource type="PackedScene" uid="uid://dlgxuw1fy6kp8" path="res://Objects/Inventory/Slot.tscn" id="1_2yffr"]
-[ext_resource type="Script" path="res://Scripts/Inventory/HotBar.cs" id="1_y52s2"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Hotbar.cs" id="1_i4maf"]
+[ext_resource type="PackedScene" uid="uid://dlgxuw1fy6kp8" path="res://Objects/Inventory/Slot.tscn" id="2_ql7o3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohljn"]
 draw_center = false
@@ -17,14 +17,14 @@ expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
-[node name="HotBar" type="Control"]
+[node name="Hotbar" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_y52s2")
+script = ExtResource("1_i4maf")
 
 [node name="Padding" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,41 +44,36 @@ size_flags_vertical = 8
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="Slot0" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot0" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot1" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot1" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot2" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot2" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot3" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot3" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot4" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot4" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot5" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot5" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot6" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot6" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot7" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot7" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot8" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot8" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
-[node name="Slot9" parent="Padding/ItemList" instance=ExtResource("1_2yffr")]
+[node name="Slot9" parent="Padding/ItemList" instance=ExtResource("2_ql7o3")]
 layout_mode = 2
 
 [node name="Selection" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ohljn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cdsj51bbxcsu3"]
+[gd_scene load_steps=42 format=3 uid="uid://cdsj51bbxcsu3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_4urdj"]
 [ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="2_5mg7w"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cbr1ev3c15aw8" path="res://Objects/Player/PlayerCam.tscn" id="3_i0s1y"]
 [ext_resource type="PackedScene" uid="uid://csqgdeqopf83n" path="res://Objects/Player/PreviewCursor.tscn" id="4_yqlwi"]
 [ext_resource type="PackedScene" uid="uid://cmpbqhy6776dh" path="res://Objects/Inventory/PlayerInventory.tscn" id="5_1yia4"]
-[ext_resource type="PackedScene" uid="uid://bo22ap6jbvmkr" path="res://Objects/Inventory/HotBar.tscn" id="5_grw5b"]
+[ext_resource type="PackedScene" uid="uid://bo22ap6jbvmkr" path="res://Objects/Inventory/Hotbar.tscn" id="5_6tt55"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="7_wcr1h"]
 [ext_resource type="Script" path="res://Scripts/CustomResources/LootTable.cs" id="8_dpxyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmpks"]
@@ -150,45 +151,85 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0gu3"]
 size = Vector2(8, 3)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_731pu"]
-load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_djmjk"]
+load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tghhk"]
-atlas = SubResource("CompressedTexture2D_731pu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qnid"]
+atlas = SubResource("CompressedTexture2D_djmjk")
 region = Rect2(17, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_5jbb2"]
-script = ExtResource("2_p20tq")
-Texture = SubResource("AtlasTexture_tghhk")
-Frames = 0
-Name = "Wood"
-Description = "Can be gathered from trees"
+[sub_resource type="Resource" id="Resource_fbman"]
+script = ExtResource("7_wcr1h")
+Texture = SubResource("AtlasTexture_7qnid")
+Frames = 1
+Name = "Planks Floor"
+Id = &"_:PlanksFloor"
+Description = "Floor made out of wood"
 MaxStackSize = 1000
-StackSize = 900
+StackSize = 400
 SlotType = 0
 Rarity = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q0ol7"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_alh00"]
+load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7d0n"]
+atlas = SubResource("CompressedTexture2D_alh00")
+region = Rect2(51, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_wk5g6"]
+script = ExtResource("7_wcr1h")
+Texture = SubResource("AtlasTexture_w7d0n")
+Frames = 1
+Name = "Stone Floor"
+Id = &"_:StoneFloor"
+Description = "Floor made out of stone"
+MaxStackSize = 1000
+StackSize = 300
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uyupe"]
+load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o10c8"]
+atlas = SubResource("CompressedTexture2D_uyupe")
+region = Rect2(34, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_5l6ko"]
+script = ExtResource("7_wcr1h")
+Texture = SubResource("AtlasTexture_o10c8")
+Frames = 1
+Name = "Dirt Floor"
+Id = &"_:DirtFloor"
+Description = "Floor made out of dirt"
+MaxStackSize = 1000
+StackSize = 500
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dduq4"]
 load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5s07h"]
-atlas = SubResource("CompressedTexture2D_q0ol7")
-region = Rect2(17, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7if2v"]
+atlas = SubResource("CompressedTexture2D_dduq4")
+region = Rect2(34, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_mpjvk"]
+[sub_resource type="Resource" id="Resource_hi6ys"]
 script = ExtResource("2_p20tq")
-Texture = SubResource("AtlasTexture_5s07h")
+Texture = SubResource("AtlasTexture_7if2v")
 Frames = 0
-Name = "Wood"
-Description = "Can be gathered from trees"
+Name = "Stone"
+Id = &"_:Stone"
+Description = "Can be gathered from rocks"
 MaxStackSize = 1000
-StackSize = 800
+StackSize = 10
 SlotType = 0
 Rarity = 0
 
 [sub_resource type="Resource" id="Resource_qhmgl"]
 script = ExtResource("8_dpxyh")
-Table = Array[Object]([SubResource("Resource_5jbb2"), SubResource("Resource_mpjvk")])
+Table = Array[Object]([SubResource("Resource_fbman"), SubResource("Resource_wk5g6"), SubResource("Resource_5l6ko"), SubResource("Resource_hi6ys")])
 Rolls = 0
 
 [node name="Player" type="RigidBody2D"]
@@ -226,7 +267,7 @@ zoom = Vector2(3.5, 3.5)
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
-[node name="HotBar" parent="Hud" instance=ExtResource("5_grw5b")]
+[node name="Hotbar" parent="Hud" instance=ExtResource("5_6tt55")]
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 

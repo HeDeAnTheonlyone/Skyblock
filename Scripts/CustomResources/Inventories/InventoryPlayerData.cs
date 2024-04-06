@@ -8,8 +8,10 @@ public partial class InventoryPlayerData : InventoryData
 {
     [ExportGroup("Properties")]
     [Export] public ItemData[] Armor { get; private set; } = new ItemData[3];
-    public Slot[] ArmorSlots { get; private set; }
-    public Slot[] HotBarSlots { get; private set; }
+    private Slot[] armorSlots;
+    private Slot[] hotbarSlots;
+    public Hotbar Hotbar { get; private set; }
+
 
 
     public InventoryPlayerData()
@@ -19,11 +21,12 @@ public partial class InventoryPlayerData : InventoryData
 
 
 
-    public void SetSlots(Slot[] itemSlots, Slot[] armorSlots, Slot[] hotBarSlots)
+    public void SetSlotsAndValues(Slot[] itemSlots, Slot[] _armorSlots, Hotbar hotbar)
     {
         SetSlots(itemSlots);
-        ArmorSlots = armorSlots;
-        HotBarSlots = hotBarSlots;
+        armorSlots = _armorSlots;
+        Hotbar = hotbar;
+        hotbarSlots = Hotbar.GetSlots();
     }
 
 
@@ -32,8 +35,8 @@ public partial class InventoryPlayerData : InventoryData
     public override void UpdateInventoryItems()
     {
         base.UpdateInventoryItems();
-        UpdateInventoryItemsInternal(ArmorSlots, Armor);
-        UpdateInventoryItemsInternal(HotBarSlots, Items.Take(10).ToArray());
+        UpdateInventoryItemsInternal(armorSlots, Armor);
+        UpdateInventoryItemsInternal(hotbarSlots, Items.Take(10).ToArray());
     }
 
 
@@ -45,7 +48,7 @@ public partial class InventoryPlayerData : InventoryData
 
     public override void MoveItem(InventoryItem item)
     {
-        if (!MoveItemInternal(item, ItemSlots, Items))
-            MoveItemInternal(item, ArmorSlots, Armor);
+        if (!MoveItemInternal(item, itemSlots, Items))
+            MoveItemInternal(item, armorSlots, Armor);
     }
 }
