@@ -1,6 +1,5 @@
 using System;
 using Godot;
-using Godot.NativeInterop;
 
 public partial class PreviewCursor : Node2D
 {
@@ -120,6 +119,18 @@ public partial class PreviewCursor : Node2D
 	{
 		if (grid.GetCellSourceId(item.PlaceLayer, position) != -1)
 			return;
+		
+		Godot.Collections.Array<Vector2I> surroundingCells = grid.GetSurroundingCells(position);
+		int neighbourCount = 0;
+
+		foreach (Vector2I neighbour in surroundingCells)
+		{
+			if (grid.GetCellSourceId(item.PlaceLayer, neighbour) != -1)
+				neighbourCount ++;
+		}
+
+		if (neighbourCount == 0)
+			return;
 
 		grid.SetCell(item.PlaceLayer, position, item.PlaceLayer, item.TileCoordinates);
 		item.StackSize --;
@@ -142,6 +153,7 @@ public partial class PreviewCursor : Node2D
 			return;
 		}
 	}
+
 
 
 	private void ModeIconAnim()
@@ -189,7 +201,15 @@ public partial class PreviewCursor : Node2D
 			mousePos.Y - (mousePos.Y % gridSize) + (gridSize / 2) :
 			mousePos.Y - (mousePos.Y % gridSize) - (gridSize / 2);
 
-		Position = new Vector2(xPos, yPos);
+		Vector2 newPosition = new Vector2(xPos, yPos);
+
+		if (Position != newPosition)
+		{
+			Position = newPosition;
+
+			if (Input.IsActionPressed("TileInteract") && ownerPlayer.Alive)
+				TileInteraction();
+		} 
 	}
 
 
