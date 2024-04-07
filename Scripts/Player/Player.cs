@@ -5,16 +5,16 @@ public partial class Player : RigidBody2D
 	public bool Alive { get; private set; } = true;
 	[ExportCategory("Movement")]
 	[Export] public float MoveSpeed { get; set; }
+	public InventoryPlayerData Inventory { get; private set; }
 	private Vector2 moveDir;
 	private AnimatedSprite2D sprite;
-	private PlayerInventory inventory;
 
 
 
 	public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite2D>("Sprite");	
-		inventory = GetNode<PlayerInventory>("Overlay/PlayerInventory");
+		Inventory = GetNode<PlayerInventory>("Overlay/PlayerInventory").Data as InventoryPlayerData;
 	}
 
 
@@ -68,7 +68,7 @@ public partial class Player : RigidBody2D
 
 
 
-	public void CollectItem(ItemData item) => inventory.Data.AddItem(item);
+	public void CollectItem(ItemData item) => Inventory.AddItem(item);
 
 
 

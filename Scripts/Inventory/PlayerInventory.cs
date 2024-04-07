@@ -5,16 +5,23 @@ using Godot;
 
 public partial class PlayerInventory : Inventory
 {
-	[Export] public new InventoryPlayerData Data { get; private set; } = new InventoryPlayerData();
-	[Export] public LootTable TestTable;
+	//[Export] public new InventoryPlayerData Data { get; private set; } = new InventoryPlayerData();
+	[Export] public LootTable TestTable; // TODO Remove test table
 	private VBoxContainer armorList;
+	private Hotbar hotbar;
+
+
+
+	private PlayerInventory()
+	{
+		Data = new InventoryPlayerData();
+	}
 
 
 
 	public override void _Ready()
 	{
 		base._Ready();
-		GD.Print(TestTable);
 	}
 
 
@@ -32,11 +39,12 @@ public partial class PlayerInventory : Inventory
 
 
 
-    protected override void GetSlots()
-    {
-		Data.ItemSlots = itemGrid.GetChildren().Cast<Slot>().ToArray();
-		Data.ArmorSlots = armorList.GetChildren().Cast<Slot>().ToArray();
-	}
+    protected override void SetSlotsAndValues() => (Data as InventoryPlayerData).SetSlotsAndValues
+	(
+		itemGrid.GetChildren().Cast<Slot>().ToArray(),
+		armorList.GetChildren().Cast<Slot>().ToArray(),
+		GetNode<Hotbar>("../../Hud/Hotbar")
+	);
 
 
 
@@ -50,7 +58,7 @@ public partial class PlayerInventory : Inventory
 				Open();
         }
 
-		// TODO Remove temporary inputs
+		/// TEMP temporary inputs
 		if (Input.IsActionJustPressed("Space"))
         {
 			GD.Print("Add test items");
@@ -67,6 +75,6 @@ public partial class PlayerInventory : Inventory
 				GD.Print(item.Name + "   " + item.StackSize + "/" + item.MaxStackSize);
 			}
         }
-		//
+		///
     }
 }

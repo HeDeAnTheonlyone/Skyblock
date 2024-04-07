@@ -8,8 +8,8 @@ using Godot;
 public abstract partial class InventoryData : Resource
 {
     [ExportGroup("Properties")]
-    [Export] public ItemData[] Items { get; set; }
-    public Slot[] ItemSlots { get; set; }
+    [Export] public ItemData[] Items { get; protected set; }
+    protected Slot[] itemSlots;
     //private Control itemBuffer;
     protected readonly PackedScene invItem = GD.Load("res://Objects/Inventory/InventoryItem.tscn") as PackedScene;
 
@@ -32,10 +32,12 @@ public abstract partial class InventoryData : Resource
     //     item.Size = size;
     // }
 
+    protected void SetSlots(Slot[] _itemSlots) => itemSlots = _itemSlots;
+
 
 
     #region Update items in inventory
-    public virtual void UpdateInventoryItems() => UpdateInventoryItemsInternal(ItemSlots, Items);
+    public virtual void UpdateInventoryItems() => UpdateInventoryItemsInternal(itemSlots, Items);
     protected void UpdateInventoryItemsInternal(Slot[] slots, ItemData[] items)
     {
         for (int i = 0; i < items.Length; i++)
@@ -80,7 +82,7 @@ public abstract partial class InventoryData : Resource
 
 
 
-    public virtual void MoveItem(InventoryItem item) => MoveItemInternal(item, ItemSlots, Items);
+    public virtual void MoveItem(InventoryItem item) => MoveItemInternal(item, itemSlots, Items);
     protected bool MoveItemInternal(InventoryItem item, Slot[] slots, ItemData[] itemList)
     {
         int oldIndex = Array.IndexOf(itemList, item.Data);
@@ -121,7 +123,7 @@ public abstract partial class InventoryData : Resource
 
 
 
-    public void SplitItem(InventoryItem splitItem, int amount) => SplitItemInternal(splitItem, ItemSlots, amount, Items);
+    public void SplitItem(InventoryItem splitItem, int amount) => SplitItemInternal(splitItem, itemSlots, amount, Items);
     protected virtual bool SplitItemInternal(InventoryItem splitItem, Slot[] slots, int amount, ItemData[] itemList)
     {
         Rect2 itemCenter = new Rect2(splitItem.GlobalPosition + splitItem.Size / 2, 25, 25);

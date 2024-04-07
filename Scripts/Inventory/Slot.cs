@@ -9,25 +9,42 @@ public partial class Slot : AspectRatioContainer
     {
         get => GlobalPosition + Size / 2;
     }
+    private Panel bg;
+
+
+
+    public override void _Ready()
+    {
+        bg = GetNode<Panel>("Bg");
+    }
 
 
 
     public enum SlotTypes
     {
         Item,
+        All,
         Helmet,
         ChestPlate,
         Leggins,
-        Fuel
+        Fuel,
     }
 
 
 
     public bool MatchType(SlotTypes type)
     {
-        if (SlotType == SlotTypes.Item)
+        if (type == SlotTypes.All || SlotType == SlotTypes.Item)
             return true;
 
         return SlotType == type;
     }
+
+
+
+    public Vector2 GetVisualPosition() => bg.GlobalPosition;
+
+
+
+    public Vector2 getVisualSize() => bg.Size;
 }

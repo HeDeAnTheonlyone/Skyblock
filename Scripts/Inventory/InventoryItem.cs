@@ -6,7 +6,6 @@ public partial class InventoryItem : Control
 {
     [Export] public ItemData Data { get; set; }
     public InventoryData inventory;
-    // private TextureRect sprite;
     private AnimatedTextureRect sprite;
     private Label counter;
     private bool followCursor = false;
@@ -65,16 +64,18 @@ public partial class InventoryItem : Control
 
 
 
-    // FIX
     private void LoadErrorTexture()
     {
         GD.PrintErr($"Failed to load item texture for '{GetPath()}'!");
-        AtlasTexture errTex = new AtlasTexture
-        {
-            Atlas = GD.Load<Texture2D>("res://Assets/Items/Debug.png"),
-            Region = new Rect2(0, 0 , 16, 16)
-        };
-        // sprite.Texture = errTex;
+        ImageTexture errTex = GD.Load<ImageTexture>("res://Assets/Items/Debug.png");
+
+        SpriteFrames anim = new SpriteFrames();
+
+        anim.AddAnimation("Fallback");
+        anim.AddFrame("Fallback", errTex);
+        
+        sprite.SpriteFrames = anim;
+        sprite.Animation = "Fallback";
     }
 
 

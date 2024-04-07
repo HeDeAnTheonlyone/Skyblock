@@ -2,29 +2,52 @@ using Godot;
 
 
 
-[Tool]
 [GlobalClass, Icon("res://Assets/Icons/PlaceDown.svg")]
 public partial class ItemPlacableData : ItemData
 {
-    private int placeLayer;
-    private Vector2I TextureCoordinates;
-
-    [ExportGroup("Item")]
-    [ExportSubgroup("Texture")]
-    public override AtlasTexture Texture
+    private int? placeLayer = null;
+    public int PlaceLayer
     {
-        get => base.Texture;
-        set
+        get
         {
-            base.Texture = value;
-            
-            if (Texture != null)
+            if (placeLayer != null)
+                return (int)placeLayer; 
+
+            switch (Texture.Atlas.ResourcePath)
             {
-                if (!Texture.IsConnected(SignalName.Changed, Callable.From(UpdateTextureDependenValues)))
-                    Texture.Changed += UpdateTextureDependenValues;
+                case "res://Assets/Items/Floor.png":
+                    placeLayer = 0;
+                    break;
+
+                case "res://Assets/Items/Decoration.png":
+                    placeLayer = 1;
+                    break;
+
+                default:
+                    placeLayer = 0;
+                    break;
             }
+
+            return (int)placeLayer;
         }
     }
+    private Vector2I? tileCoordinates = null;
+    public Vector2I TileCoordinates
+    {
+        get
+        {
+            if (tileCoordinates != null)
+                return (Vector2I)tileCoordinates;
+
+            tileCoordinates = new Vector2I
+            (
+                (int)Texture.Region.Position.X / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet),
+                (int)Texture.Region.Position.Y / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet)
+            );
+            
+            return (Vector2I)tileCoordinates;
+        }
+    } 
 
 
 
@@ -35,50 +58,5 @@ public partial class ItemPlacableData : ItemData
 
 
 
-    public ItemPlacableData(AtlasTexture texture, string name, string description, int maxStackSize = 1000) : base(texture, name, description, maxStackSize) {}
-
-
-
-    private void UpdateTextureDependenValues()
-    {
-        try
-        {
-            TextureCoordinates = TextureCoordinates with
-            {
-                X = (int)Texture.Region.Position.X / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet),
-                Y = (int)Texture.Region.Position.Y / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet)
-            };
-        }
-        catch
-        {
-            TextureCoordinates = TextureCoordinates with
-            {
-                X = (int)Texture.Region.Position.X / 17,
-                Y = (int)Texture.Region.Position.Y / 17
-            };
-        }
-
-        if (Texture.Atlas != null)
-            SetPlaceLayer();
-    }
-
-
-
-    private void SetPlaceLayer()
-    {
-        switch (Texture.Atlas.ResourcePath)
-        {
-            case "res://Assets/Items/Floor.png":
-                placeLayer = 0;
-                break;
-
-            case "res://Assets/Items/Decoration.png":
-                placeLayer = 1;
-                break;
-
-            default:
-                placeLayer = 1;
-                break;
-        }
-    }
+    public ItemPlacableData(AtlasTexture texture, string name, StringName id, string description, int maxStackSize = 1000) : base(texture, name, id, description, maxStackSize) {}
 }

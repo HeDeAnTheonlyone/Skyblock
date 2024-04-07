@@ -12,6 +12,7 @@ script = ExtResource("1_akg7h")
 Texture = SubResource("AtlasTexture_78nf2")
 Frames = 0
 Name = "Stone"
+Id = &"_:Stone"
 Description = "Can be gathered from rocks"
 MaxStackSize = 1000
 StackSize = 1

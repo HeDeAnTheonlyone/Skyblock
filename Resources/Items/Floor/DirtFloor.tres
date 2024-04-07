@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemPlacableData" load_steps=4 format=3 uid="uid://cduh81hl2f3cj"]
+
+[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_fqanc"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_0jenv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tps0d"]
+atlas = ExtResource("1_fqanc")
+region = Rect2(34, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_0jenv")
+Texture = SubResource("AtlasTexture_tps0d")
+Frames = 1
+Name = "Dirt Floor"
+Id = &"_:DirtFloor"
+Description = "Floor made out of dirt"
+MaxStackSize = 1000
+StackSize = 1
+SlotType = 0
+Rarity = 0

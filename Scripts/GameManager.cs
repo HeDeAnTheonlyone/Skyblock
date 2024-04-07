@@ -11,7 +11,7 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        /// TODO Remove Temporary values
+        /// TEMP Remove Temporary values
 
         CurrentLevel = "DevWorld";
 
