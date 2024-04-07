@@ -1,34 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://chersl3ak7vlx"]
+[gd_scene load_steps=4 format=3 uid="uid://chersl3ak7vlx"]
 
-[ext_resource type="FontFile" uid="uid://7x4jq64wcrg7" path="res://Assets/Fonts/press-start.regular.ttf" id="1_74apa"]
-
-[sub_resource type="Theme" id="Theme_1blru"]
-default_font = ExtResource("1_74apa")
+[ext_resource type="Script" path="res://Scripts/Inventory/Tooltip.cs" id="1_qqour"]
+[ext_resource type="Theme" uid="uid://b67h8b5k13mn6" path="res://Themes/TooltipLables.tres" id="1_ws67n"]
+[ext_resource type="StyleBox" uid="uid://crq3pt58ef48w" path="res://Styles/TooltipBackground.tres" id="2_d2vm2"]
 
 [node name="Tooltip" type="Control"]
 layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qqour")
+
+[node name="TextFieldList" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 145.0
+theme_override_constants/separation = 25
+
+[node name="Name" type="Label" parent="TextFieldList"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_ws67n")
+
+[node name="Bg" type="Panel" parent="TextFieldList/Name"]
+show_behind_parent = true
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_d2vm2")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Name" type="Label" parent="Panel/VBoxContainer"]
+[node name="Description" type="Label" parent="TextFieldList"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme = SubResource("Theme_1blru")
-theme_type_variation = &"TooltipLabel"
-text = "Test Text
-"
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("1_ws67n")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+autowrap_mode = 3
 
-[node name="Description" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="Bg" type="Panel" parent="TextFieldList/Description"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_d2vm2")

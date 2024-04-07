@@ -5,7 +5,6 @@ using Godot;
 
 public partial class PlayerInventory : Inventory
 {
-	//[Export] public new InventoryPlayerData Data { get; private set; } = new InventoryPlayerData();
 	[Export] public LootTable TestTable; // TODO Remove test table
 	private VBoxContainer armorList;
 	private Hotbar hotbar;
@@ -27,11 +26,14 @@ public partial class PlayerInventory : Inventory
 
 
 	protected override bool IsDataNull() => Data == null;
+
+
+
 	protected override InventoryData GetData() => Data;
 
 
 
-    protected override void GetSlotParentNodes()
+    protected override void GetSlotCollectionNodes()
 	{
 		itemGrid = GetNode<GridContainer>("Padding/InnerPadding/Splitter/ItemGrid");
 		armorList = GetNode<VBoxContainer>("Padding/InnerPadding/Splitter/PlayerSprite/ArmorPadding/ArmorList");
@@ -39,8 +41,9 @@ public partial class PlayerInventory : Inventory
 
 
 
-    protected override void SetSlotsAndValues() => (Data as InventoryPlayerData).SetSlotsAndValues
+    protected override void SetSlotsAndValues() => (Data as InventoryPlayerData).SetupData
 	(
+		tooltip,
 		itemGrid.GetChildren().Cast<Slot>().ToArray(),
 		armorList.GetChildren().Cast<Slot>().ToArray(),
 		GetNode<Hotbar>("../../Hud/Hotbar")

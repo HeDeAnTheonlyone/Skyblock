@@ -6,20 +6,24 @@ public abstract partial class Inventory : Control
 {
 	public InventoryData Data { get; protected set; }
 	protected GridContainer itemGrid;
+	protected Tooltip tooltip;
 
 
 
 	public override void _Ready()
     {
-		GetSlotParentNodes();
+		tooltip = GetNodeOrNull<Tooltip>("Tooltip");
+
+		if (tooltip == null)
+			throw new NodeIsMissingException($"Tooltip node at path '{GetPath()}/Tooltip' is missing!");
+
+		GetSlotCollectionNodes();
 
 		if (itemGrid == null)
-			throw new FieldIsNullException($"No reference to an itemgrid in '{GetPath()}'!");
+			throw new FieldIsNullException($"No reference to an ItemGrid in '{GetPath()}'!");
 
-		if (CheckInventoryData())
+		if (IsDataNull())
 			throw new FieldIsNullException($"Node '{GetPath()}' has no Inventory resource!");
-
-		//GetData().SetItemBufferNode(GetNode<Control>("ItemBuffer"));
 
 		SetSlotsAndValues();
 
@@ -28,13 +32,15 @@ public abstract partial class Inventory : Control
 
 
 
-	private bool CheckInventoryData() => IsDataNull();
     protected virtual bool IsDataNull() => Data == null;
+
+
+
 	protected virtual InventoryData GetData() => Data;
 
 
 
-	protected abstract void GetSlotParentNodes();
+	protected abstract void GetSlotCollectionNodes();
 
 
 
@@ -47,7 +53,7 @@ public abstract partial class Inventory : Control
 		GetData().UpdateInventoryItems();
 		GetTree().Paused = true;
 		Visible = true;
-		Input.MouseMode = Input.MouseModeEnum.Visible;
+		GameManager.ShowInWorldCursor(false);
 	}
 
 
@@ -56,6 +62,6 @@ public abstract partial class Inventory : Control
 	{
 		GetTree().Paused = false;
 		Visible = false;
-		Input.MouseMode = Input.MouseModeEnum.Hidden;
+		GameManager.ShowInWorldCursor(true);
 	}
 }

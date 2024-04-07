@@ -10,34 +10,28 @@ public abstract partial class InventoryData : Resource
     [ExportGroup("Properties")]
     [Export] public ItemData[] Items { get; protected set; }
     protected Slot[] itemSlots;
-    //private Control itemBuffer;
+    protected Tooltip tooltip;
     protected readonly PackedScene invItem = GD.Load("res://Objects/Inventory/InventoryItem.tscn") as PackedScene;
 
 
 
-    //public void SetItemBufferNode(Control bufferNode) => itemBuffer = bufferNode;
+    protected void SetupData(Tooltip _tooltip, Slot[] _itemSlots)
+    {
+        tooltip = _tooltip;
+        itemSlots = _itemSlots;
+    }
 
 
 
-    // public virtual void AttachToBuffer(InventoryItem item) => AttachToBufferInternal(item, Items);
-    // protected void AttachToBufferInternal(InventoryItem item, ItemData[] itemList)
-    // {
-    //     itemList[item.GetIndex()] = null;
-    //     Vector2 size = item.Size;
-
-
-
-    //     item.GetParent().RemoveChild(item);
-    //     itemBuffer.AddChild(item);
-    //     item.Size = size;
-    // }
-
-    protected void SetSlots(Slot[] _itemSlots) => itemSlots = _itemSlots;
+    protected virtual Godot.Collections.Array<Slot[]> GetSlots() => new Godot.Collections.Array<Slot[]> { itemSlots };
 
 
 
     #region Update items in inventory
     public virtual void UpdateInventoryItems() => UpdateInventoryItemsInternal(itemSlots, Items);
+
+
+
     protected void UpdateInventoryItemsInternal(Slot[] slots, ItemData[] items)
     {
         for (int i = 0; i < items.Length; i++)
@@ -57,21 +51,20 @@ public abstract partial class InventoryData : Resource
                 if (item.Data != items[i])
                 {
                     item.QueueFree();
-                    UpdateInventoryItemsInstantiastor(slots[i], items[i]);
+                    InstantiateInventoryItem(slots[i], items[i]);
                 }
             }
             else
-                UpdateInventoryItemsInstantiastor(slots[i], items[i]);
+                InstantiateInventoryItem(slots[i], items[i]);
         }
     }
 
 
 
-    private void UpdateInventoryItemsInstantiastor(Slot slot, ItemData item)
+    private void InstantiateInventoryItem(Slot slot, ItemData item)
     {
         InventoryItem invItemInstance = invItem.Instantiate() as InventoryItem;
-        invItemInstance.Data = item;
-        invItemInstance.inventory = GetInventoryData();
+        invItemInstance.SetupData(item, GetInventoryData(), tooltip);
         slot.AddChild(invItemInstance);
     }
 
