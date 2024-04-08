@@ -21,13 +21,17 @@ public partial class InventoryPlayerData : InventoryData
 
 
 
-    public void SetSlotsAndValues(Slot[] itemSlots, Slot[] _armorSlots, Hotbar hotbar)
+    public void SetupData(Tooltip _tooltip, Slot[] itemSlots, Slot[] _armorSlots, Hotbar hotbar)
     {
-        SetSlots(itemSlots);
+        SetupData(_tooltip, itemSlots);
         armorSlots = _armorSlots;
         Hotbar = hotbar;
         hotbarSlots = Hotbar.GetSlots();
     }
+
+
+
+    protected override Godot.Collections.Array<Slot[]> GetSlots() => new Godot.Collections.Array<Slot[]> { itemSlots, armorSlots };
 
 
 

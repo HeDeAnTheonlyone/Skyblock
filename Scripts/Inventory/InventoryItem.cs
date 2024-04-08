@@ -5,7 +5,8 @@ using Godot;
 public partial class InventoryItem : Control
 {
     [Export] public ItemData Data { get; set; }
-    public InventoryData inventory;
+    private InventoryData inventory;
+    private Tooltip tooltip;
     private AnimatedTextureRect sprite;
     private Label counter;
     private bool followCursor = false;
@@ -15,7 +16,7 @@ public partial class InventoryItem : Control
 
     public override void _Ready()
     {
-        sprite = GetNode<AnimatedTextureRect>("Sprite");
+        sprite = GetNode<AnimatedTextureRect>("Padding/Sprite");
         counter = GetNode<Label>("Counter"); 
         UpdateCounter(Data.StackSize);
         Data.UpdateStackSize += UpdateCounter;
@@ -118,6 +119,15 @@ public partial class InventoryItem : Control
 
 
 
+    public void SetupData(ItemData _item, InventoryData _inventory, Tooltip _tooltip)
+    {
+        Data = _item;
+        inventory =_inventory;
+        tooltip = _tooltip;
+    }
+
+
+
     private void CenterInSlot() => GlobalPosition = GetParent<Slot>().Center - Size / 2;
 
 
@@ -130,5 +140,13 @@ public partial class InventoryItem : Control
 
         counter.Text = stackSize.ToString();
     }
+
+
+
+    private void SetTooltipItemReference() => tooltip.SetContents(this);
+
+
+
+    private void DeactivateTooltip() => tooltip.Deactivate();
     #endregion
 }

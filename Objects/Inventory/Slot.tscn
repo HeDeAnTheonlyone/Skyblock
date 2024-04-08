@@ -25,7 +25,6 @@ stretch_mode = 3
 script = ExtResource("1_lvqhc")
 
 [node name="Bg" type="Panel" parent="."]
-custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0edra")

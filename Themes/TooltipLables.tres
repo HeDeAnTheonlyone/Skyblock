@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b67h8b5k13mn6"]
+
+[ext_resource type="FontFile" uid="uid://7x4jq64wcrg7" path="res://Assets/Fonts/PressStart.Regular.ttf" id="1_ckkts"]
+
+[resource]
+default_font = ExtResource("1_ckkts")
+default_font_size = 16
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 3
+Label/fonts/font = ExtResource("1_ckkts")

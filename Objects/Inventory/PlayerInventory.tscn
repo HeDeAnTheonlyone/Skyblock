@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmpbqhy6776dh"]
+[gd_scene load_steps=8 format=3 uid="uid://cmpbqhy6776dh"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/PlayerInventory.cs" id="1_mbovw"]
 [ext_resource type="Texture2D" uid="uid://bhwtdpixty5nu" path="res://Assets/Player/InventoryBg.png" id="2_asydg"]
 [ext_resource type="PackedScene" uid="uid://dlgxuw1fy6kp8" path="res://Objects/Inventory/Slot.tscn" id="3_k0tbr"]
 [ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="4_38o1r"]
+[ext_resource type="PackedScene" uid="uid://chersl3ak7vlx" path="res://Objects/Inventory/Tooltip.tscn" id="5_k5o3p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5a3yd"]
 bg_color = Color(0, 0, 0, 0)
@@ -304,7 +305,6 @@ layout_mode = 2
 [node name="PlayerSprite" type="TextureRect" parent="Padding/InnerPadding/Splitter"]
 self_modulate = Color(1, 1, 1, 0.117647)
 layout_mode = 2
-size_flags_horizontal = 3
 mouse_filter = 2
 texture = SubResource("AtlasTexture_o381u")
 
@@ -336,8 +336,5 @@ SlotType = 2
 layout_mode = 2
 SlotType = 3
 
-[node name="ItemBuffer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Tooltip" parent="." instance=ExtResource("5_k5o3p")]
+layout_mode = 1
