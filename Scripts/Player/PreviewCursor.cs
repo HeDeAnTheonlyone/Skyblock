@@ -17,8 +17,8 @@ public partial class PreviewCursor : Node2D
 		set
 		{
 			mode = value;
-			float s = GameManager.Instance.SingleTileSize;
-			modeIcon.RegionRect = new Rect2((int)value * s, 0, s, s);
+			float tileSize = GameManager.Instance.SingleTileSize;
+			modeIcon.RegionRect = new Rect2((int)value * tileSize, 0, tileSize, tileSize);
 		}
 	}
 
@@ -121,15 +121,15 @@ public partial class PreviewCursor : Node2D
 			return;
 		
 		Godot.Collections.Array<Vector2I> surroundingCells = grid.GetSurroundingCells(position);
-		int neighbourCount = 0;
+		int neighborCount = 0;
 
-		foreach (Vector2I neighbour in surroundingCells)
+		foreach (Vector2I neighbor in surroundingCells)
 		{
-			if (grid.GetCellSourceId(item.PlaceLayer, neighbour) != -1)
-				neighbourCount ++;
+			if (grid.GetCellSourceId(item.PlaceLayer, neighbor) != -1)
+				neighborCount ++;
 		}
 
-		if (neighbourCount == 0)
+		if (neighborCount == 0)
 			return;
 
 		grid.SetCell(item.PlaceLayer, position, item.PlaceLayer, item.TileCoordinates);

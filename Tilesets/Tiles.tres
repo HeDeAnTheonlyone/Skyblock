@@ -1,10 +1,7 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://crlfbd1syj3mk"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://crlfbd1syj3mk"]
 
-[ext_resource type="Resource" uid="uid://djhjgr6ah6xj1" path="res://Resources/Items/Floor/PlanksFloor.tres" id="1_mspia"]
 [ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_ys7gk"]
 [ext_resource type="Texture2D" uid="uid://s1115ycewgjs" path="res://Assets/Items/Decorations.png" id="2_25rbu"]
-[ext_resource type="Resource" uid="uid://cduh81hl2f3cj" path="res://Resources/Items/Floor/DirtFloor.tres" id="2_l7eoh"]
-[ext_resource type="Resource" uid="uid://51ds64xgl4t5" path="res://Resources/Items/Floor/StoneFloor.tres" id="3_1chkj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qir1a"]
 friction = 0.0
@@ -13,33 +10,27 @@ friction = 0.0
 resource_name = "Floor"
 texture = ExtResource("1_ys7gk")
 separation = Vector2i(1, 1)
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_1/angular_velocity = 0.0
-1:0/0/custom_data_0 = ExtResource("1_mspia")
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_1/angular_velocity = 0.0
-2:0/0/custom_data_0 = ExtResource("2_l7eoh")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_1/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_1/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_1/angular_velocity = 0.0
 3:0/0 = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_1/angular_velocity = 0.0
-3:0/0/custom_data_0 = ExtResource("3_1chkj")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2o67i"]
 resource_name = "Decorations"

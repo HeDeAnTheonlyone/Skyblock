@@ -22,7 +22,7 @@ public partial class Tooltip : Control
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("ShowTooltip") && active)
+        if (@event.IsAction("ShowTooltip") && active)
 		{
 			Visible = true;
 		}
@@ -35,9 +35,8 @@ public partial class Tooltip : Control
 
 
 
-	private void ResizeLables()
+	private void ResizeLabels()
 	{
-
 		Font fnt = name.GetThemeDefaultFont();
 		float newWidth = fnt.GetStringSize(name.Text, fontSize: name.GetThemeDefaultFontSize()).X + 100;
 
@@ -47,17 +46,20 @@ public partial class Tooltip : Control
 
 
 
-	#region Signals
-	public void Deactivate() => active = false;
-
+    #region Signals
+    public void Deactivate()
+    {
+		Visible = false;
+		active = false;
+    }
 
 
     public void SetContents(InventoryItem item)
 	{
 		name.Text = item.Data.Name;
 		description.Text = item.Data.Description;
-		GlobalPosition = item.GlobalPosition;
-		ResizeLables();
+		GlobalPosition = item.GlobalPosition + new Vector2(item.Size.X + 15, 0);
+		ResizeLabels();
 		active = true;
 	}
 	#endregion
