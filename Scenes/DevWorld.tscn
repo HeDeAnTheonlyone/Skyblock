@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://3xnglwaiyi2r"]
+[gd_scene load_steps=9 format=3 uid="uid://3xnglwaiyi2r"]
 
 [ext_resource type="PackedScene" uid="uid://cwmo020cx751q" path="res://Objects/Grid.tscn" id="1_giwyk"]
 [ext_resource type="PackedScene" uid="uid://cdsj51bbxcsu3" path="res://Objects/Player/Player.tscn" id="1_vlo3o"]
 [ext_resource type="PackedScene" uid="uid://rjt738ui058t" path="res://Objects/InWorldItem.tscn" id="3_ft6xs"]
 [ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="4_qfpno"]
+[ext_resource type="PackedScene" uid="uid://dt5aikkthlorw" path="res://Objects/Sky.tscn" id="5_tqdgw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7idgj"]
 load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tc0ep"]
 atlas = SubResource("CompressedTexture2D_7idgj")
-region = Rect2(17, 0, 16, 16)
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="Resource" id="Resource_dhq0q"]
 script = ExtResource("4_qfpno")
@@ -35,3 +36,5 @@ layer_0/tile_data = PackedInt32Array(-1, 65536, 0, -65536, 65536, 0, 0, 65536, 0
 [node name="InWorldItem" parent="." instance=ExtResource("3_ft6xs")]
 position = Vector2(-42, 0)
 Data = SubResource("Resource_dhq0q")
+
+[node name="Sky" parent="." instance=ExtResource("5_tqdgw")]

@@ -5,7 +5,7 @@ using System;
 public static class ArrayExtension
 {
     /// <summary>
-    /// Swaps the two elements at the given indice.
+    /// Swaps the two elements at the given indices.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="array"></param>

@@ -41,8 +41,8 @@ public partial class ItemPlacableData : ItemData
 
             tileCoordinates = new Vector2I
             (
-                (int)Texture.Region.Position.X / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet),
-                (int)Texture.Region.Position.Y / (GameManager.Instance.SingleTileSize + GameManager.Instance.TileOffSet)
+                (int)Texture.Region.Position.X / GameManager.Instance.SingleTileSize,
+                (int)Texture.Region.Position.Y / GameManager.Instance.SingleTileSize
             );
             
             return (Vector2I)tileCoordinates;
