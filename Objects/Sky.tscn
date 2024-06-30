@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dt5aikkthlorw"]
+
+[ext_resource type="Shader" path="res://Shaders/PixelatedClouds.gdshader" id="1_2uwda"]
+[ext_resource type="Shader" path="res://Shaders/Sky.gdshader" id="1_n0hvr"]
+[ext_resource type="Texture2D" uid="uid://cac6d32h4x5ta" path="res://icon.svg" id="2_ugpgj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if0lp"]
+shader = ExtResource("1_n0hvr")
+shader_parameter/skyColor = Color(0.529412, 0.807843, 0.921569, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3p1if"]
+shader = ExtResource("1_2uwda")
+shader_parameter/scroll = Vector2(0.004, 0)
+shader_parameter/pixel_size = 400.0
+shader_parameter/lower_cloud_threshold = 0.4
+shader_parameter/upper_cloud_threshold = 0.75
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q42g6"]
+noise_type = 3
+seed = 820
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3j14v"]
+width = 2048
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_q42g6")
+
+[node name="Sky" type="CanvasLayer"]
+layer = -100
+
+[node name="Color" type="TextureRect" parent="."]
+z_index = -100
+material = SubResource("ShaderMaterial_if0lp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("2_ugpgj")
+stretch_mode = 1
+
+[node name="Clouds" type="TextureRect" parent="."]
+z_index = -99
+material = SubResource("ShaderMaterial_3p1if")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_3j14v")
+expand_mode = 1
+stretch_mode = 1

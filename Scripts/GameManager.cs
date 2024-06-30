@@ -5,7 +5,6 @@ public partial class GameManager : Node
     public static GameManager Instance { get; private set; }
     public string CurrentLevel { get; set; }
     public int SingleTileSize { get; } = 16;
-    public int TileOffSet { get; } = 1;
     private readonly CompressedTexture2D inWorldCursor = GD.Load<CompressedTexture2D>("res://Assets/Player/InWorldCursor.png");
 
 

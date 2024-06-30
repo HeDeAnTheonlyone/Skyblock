@@ -5,7 +5,8 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tps0d"]
 atlas = ExtResource("1_fqanc")
-region = Rect2(34, 0, 16, 16)
+region = Rect2(32, 0, 16, 16)
+filter_clip = true
 
 [resource]
 script = ExtResource("2_0jenv")

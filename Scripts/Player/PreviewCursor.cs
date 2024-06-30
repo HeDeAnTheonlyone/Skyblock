@@ -99,8 +99,9 @@ public partial class PreviewCursor : Node2D
 					PlaceBlock(item as ItemPlacableData, clickPos);
 				}
 
-				if (Input.IsActionPressed("RightClick"))
+				if (Input.IsActionPressed("RightClick")) {
 					BreakBlock(clickPos);
+				}
 					
 				break;
 

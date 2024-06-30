@@ -38,7 +38,7 @@ public partial class InWorldItem : Node2D
             for (int i = 0; i < Data.Frames; i++)
             {
                 anim.AddFrame("Idle", ImageTexture.CreateFromImage(altasImage.GetRegion(rect)));
-                rect.Position = rect.Position with { X = rect.Position.X + rect.Size.X + GameManager.Instance.TileOffSet };
+                rect.Position = rect.Position with { X = rect.Position.X + rect.Size.X };
             }
 
             sprite.SpriteFrames = anim;

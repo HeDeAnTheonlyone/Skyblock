@@ -57,8 +57,8 @@ public abstract partial class ItemData : Resource
     public enum ItemRarity
     {
         Common,
+        Uncommon,
         Rare,
-        ExtremlyRare,
         Legendary
     }
 }
