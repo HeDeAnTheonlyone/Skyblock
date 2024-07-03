@@ -57,6 +57,8 @@ public abstract partial class InventoryData : Resource
             else
                 InstantiateInventoryItem(slots[i], items[i]);
         }
+
+        EmitSignal(SignalName.InventoryChanged);
     }
 
 
@@ -201,6 +203,8 @@ public abstract partial class InventoryData : Resource
         splitItem.StackSize = splitSize;
         itemList[index] = splitItem;
         item.StackSize -= splitSize;
+
+        EmitSignal(SignalName.InventoryChanged);
     }
 
 
@@ -217,5 +221,12 @@ public abstract partial class InventoryData : Resource
         
         from.StackSize -= splitSize;
         to.StackSize += splitSize;
+
+        EmitSignal(SignalName.InventoryChanged);
     }
+
+
+
+    // TODO add parameter for signal
+    [Signal] public delegate void InventoryChangedEventHandler();
 }

@@ -7,7 +7,7 @@ using System;
 
 
 /// <summary>
-/// The exception that is thrown when a node with a fixed position in a tree is not there.
+/// This exception is thrown when a node with a fixed position in a tree is not there.
 /// </summary>
 public partial class NodeIsMissingException : Exception
 {

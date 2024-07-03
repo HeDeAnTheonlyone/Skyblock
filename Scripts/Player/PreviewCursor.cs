@@ -10,7 +10,8 @@ public partial class PreviewCursor : Node2D
 	private Vector2 mousePos;
 	private int gridSize;
 	private bool inCursorAnim;
-	private CursorMode mode = CursorMode.Inspect;
+	private Tween swingAnim;
+	private CursorMode mode = CursorMode.Interact;
 	public CursorMode Mode
 	{
 		get => mode;
@@ -26,9 +27,10 @@ public partial class PreviewCursor : Node2D
 
 	public enum CursorMode
 	{
-		Inspect,
+		Interact,
 		Build,
-		Break
+		Break,
+		Inspect
 	}
 
 
@@ -42,32 +44,65 @@ public partial class PreviewCursor : Node2D
 		gridSize = GameManager.Instance.SingleTileSize;
 
 		Pulse();
+
+		CallDeferred("ConnectSignal"); 
     }
 
 
 
-	public override void _Process(double delta)
+	private void ConnectSignal()
+	{
+		ownerPlayer.Inventory.InventoryChanged += UpdateCursorMode;
+		ownerPlayer.Inventory.Hotbar.HotbarSlotChanged += UpdateCursorMode;
+	}
+
+
+
+    public override void _ExitTree()
+	{
+		ownerPlayer.Inventory.InventoryChanged -= UpdateCursorMode;
+		ownerPlayer.Inventory.Hotbar.HotbarSlotChanged -= UpdateCursorMode;
+	}
+
+
+
+    public override void _Process(double delta)
 	{
 		mousePos = GetGlobalMousePosition();
-		SnapToGrid();
+		if (!SnapToGrid()) return;
+
+		// Makes it possible to hold down the button to keep placing blocks
+		if (Input.IsActionPressed("TileInteract") && ownerPlayer.Alive) TileInteraction();
 	}
 
 
 
 	public override void _Input(InputEvent @event)
     {
-		if (@event.IsActionPressed("TileInteract") && ownerPlayer.Alive)
-			TileInteraction();
-
-		if (@event.IsActionPressed("CurserModeInspect"))
-			Mode = CursorMode.Inspect;
-			
-		if (@event.IsActionPressed("CursorModeBuild"))
-			Mode = CursorMode.Build;
-
-		if (@event.IsActionPressed("CursorModeBreak"))
-			Mode = CursorMode.Break;
+		if (@event.IsActionPressed("TileInteract") && ownerPlayer.Alive) TileInteraction();
     }
+
+
+
+	private void UpdateCursorMode() => UpdateCursorMode(ownerPlayer.Inventory.Hotbar.Selected);
+
+
+
+	private void UpdateCursorMode(int itemIndex)
+	{
+		CursorMode newMode = ownerPlayer.Inventory.Items[itemIndex] switch
+		{
+			ItemPlacableData => CursorMode.Build,
+			ItemToolData => CursorMode.Break,
+			_ => CursorMode.Interact
+		};
+
+		if (Mode != newMode)
+		{
+			if (inCursorAnim) EndTweenEarly();
+			Mode = newMode;
+		}
+	}
 
 
 
@@ -83,58 +118,75 @@ public partial class PreviewCursor : Node2D
 
 		switch (Mode)
 		{
-			case CursorMode.Inspect:
+			case CursorMode.Interact:
+			{
 				ModeIconAnim();
 				break;
+			}
 
 			case CursorMode.Build:
+			{
 				ModeIconAnim();
 				ItemData item = ownerPlayer.Inventory.Items[ownerPlayer.Inventory.Hotbar.Selected];
 
 				if (Input.IsActionPressed("LeftClick"))
 				{
-					if (item == null || !(item is ItemPlacableData))
-						return;
+					if (item == null || !(item is ItemPlacableData)) return;
 					
 					PlaceBlock(item as ItemPlacableData, clickPos);
 				}
 
-				if (Input.IsActionPressed("RightClick")) {
-					BreakBlock(clickPos);
-				}
-					
+				if (Input.IsActionPressed("RightClick")) BreakBlock(clickPos);
 				break;
+			}
 
 			case CursorMode.Break:
+			{
 				ModeIconAnim();
 				break;
+			}
 
 			default:
+			{
 				throw new Exception($"Invalid cursor mode: {Mode}");
+			}
 		}
 	}
 
 
 
-	private void PlaceBlock(ItemPlacableData item, Vector2I position)
+	private void PlaceBlock(ItemPlacableData block, Vector2I position)
 	{
-		if (grid.GetCellSourceId(item.PlaceLayer, position) != -1)
-			return;
-		
-		Godot.Collections.Array<Vector2I> surroundingCells = grid.GetSurroundingCells(position);
-		int neighborCount = 0;
-
-		foreach (Vector2I neighbor in surroundingCells)
+		switch (block.Layer)
 		{
-			if (grid.GetCellSourceId(item.PlaceLayer, neighbor) != -1)
-				neighborCount ++;
+			case ItemPlacableData.PlaceLayer.Floor:
+			{
+				if (grid.GetCellSourceId(0, position) != -1) return;
+				Godot.Collections.Array<Vector2I> surroundingCells = grid.GetSurroundingCells(position);
+				bool hasNeighbor = false;
+
+				foreach (Vector2I neighbor in surroundingCells)
+				{
+					if (grid.GetCellSourceId(0, neighbor) != -1)
+					{
+						hasNeighbor = true;
+						break;
+					}
+				}
+
+				if (!hasNeighbor) return;
+				break;
+			}	
+
+			case ItemPlacableData.PlaceLayer.Decoration:
+			{
+				if (grid.GetCellSourceId(1, position) != -1 || grid.GetCellSourceId(0, position) == -1) return;
+				break;
+			}
 		}
 
-		if (neighborCount == 0)
-			return;
-
-		grid.SetCell(item.PlaceLayer, position, item.PlaceLayer, item.TileCoordinates);
-		item.StackSize --;
+		grid.SetCell((int)block.Layer, position, (int)block.Layer, block.TileCoordinates);
+		block.StackSize --;
 	}
 
 
@@ -149,7 +201,11 @@ public partial class PreviewCursor : Node2D
 				continue;
 
 			ItemPlacableData item = grid.GetCellTileData(i, position).GetCustomData("ItemData").AsGodotObject() as ItemPlacableData;
-			ownerPlayer.Inventory.AddItem(item.Duplicate(true) as ItemPlacableData);
+			if (item != null)
+			{
+				ownerPlayer.Inventory.AddItem(item.Duplicate(true) as ItemPlacableData);
+			}
+
 			grid.EraseCell(i, position);
 			return;
 		}
@@ -163,27 +219,42 @@ public partial class PreviewCursor : Node2D
 			return;
 
 		inCursorAnim = true;
-		Tween swingAnim = CreateTween();
+		swingAnim = CreateTween();
 
 		switch (Mode)
 		{
-			case CursorMode.Inspect:
-				swingAnim.TweenProperty(modeIcon, "rotation_degrees", -90, 0.4).SetTrans(Tween.TransitionType.Circ);
-				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 0, 0.4).SetTrans(Tween.TransitionType.Circ);
+			case CursorMode.Interact:
+			{
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 90, 0.1).SetTrans(Tween.TransitionType.Circ);
+				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 0, 0.3).SetTrans(Tween.TransitionType.Circ);
 				break;
+			}
 
 			case CursorMode.Build:
 			case CursorMode.Break:
+			{
 				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 90, 0.3).SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
 				swingAnim.TweenProperty(modeIcon, "rotation_degrees", 0, 0.2).SetEase(Tween.EaseType.In);
 				break;
+			}
 
 			default:
-				swingAnim.Kill();
+			{
+				EndTweenEarly();
 				return;
+			}
 		}
 	
 		swingAnim.Finished += OnCursorAnimFinished;
+	}
+
+
+
+	private void EndTweenEarly()
+	{
+		swingAnim.Kill();
+		inCursorAnim = false;
+		modeIcon.Rotation = 0;
 	}
 
 
@@ -192,7 +263,11 @@ public partial class PreviewCursor : Node2D
 
 
 
-	private void SnapToGrid()
+	/// <summary>
+	/// Snaps the cursor to the nearest grid field and returns true if it moved to a new grid
+	/// </summary>
+	/// <returns>true if it moved to a different grid field, otherwise false</returns>
+	private bool SnapToGrid()
 	{
 		float xPos = mousePos.X > 0 ?
 			mousePos.X - (mousePos.X % gridSize) + (gridSize / 2) :
@@ -203,14 +278,12 @@ public partial class PreviewCursor : Node2D
 			mousePos.Y - (mousePos.Y % gridSize) - (gridSize / 2);
 
 		Vector2 newPosition = new Vector2(xPos, yPos);
-
 		if (Position != newPosition)
 		{
 			Position = newPosition;
-
-			if (Input.IsActionPressed("TileInteract") && ownerPlayer.Alive)
-				TileInteraction();
-		} 
+			return true;
+		}
+		else return false;
 	}
 
 

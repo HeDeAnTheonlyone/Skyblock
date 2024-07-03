@@ -1,22 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://rjt738ui058t"]
+[gd_scene load_steps=4 format=3 uid="uid://rjt738ui058t"]
 
 [ext_resource type="Script" path="res://Scripts/InWorldItem.cs" id="1_ekl8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_580o0"]
-size = Vector2(12, 12)
+size = Vector2(4, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0d0g6"]
+radius = 20.0
 
 [node name="InWorldItem" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ekl8h")
 
-[node name="CollectArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
+[node name="CollectArea" type="Area2D" parent="." groups=["CollectItemTrigger"]]
+collision_layer = 4
+collision_mask = 0
+input_pickable = false
+monitoring = false
 
 [node name="Hitbox" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("RectangleShape2D_580o0")
 debug_color = Color(0, 0.803922, 0.396078, 0.419608)
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="FollowArea" type="Area2D" parent="." groups=["FollowPlayerTrigger"]]
+collision_layer = 8
+collision_mask = 0
+input_pickable = false
+monitoring = false
 
-[connection signal="body_entered" from="CollectArea" to="." method="CollectItem"]
+[node name="Hitbox" type="CollisionShape2D" parent="FollowArea"]
+shape = SubResource("CircleShape2D_0d0g6")
+debug_color = Color(0.635294, 0.521569, 0.247059, 0.419608)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
