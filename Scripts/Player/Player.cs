@@ -68,7 +68,17 @@ public partial class Player : RigidBody2D
 
 
 
-	public void CollectItem(ItemData item) => Inventory.AddItem(item);
+	public void CollectItem(Node2D area)
+	{
+		InWorldItem item = area.GetParent() as InWorldItem;
+		if (item == null) throw new NotAnItemException("Collected item is not an InWorldItem");
+
+		if (area.IsInGroup("FollowPlayerTrigger")) 
+		{
+			item.StartFollowingPlayer(this);
+		}	
+		else Inventory.AddItem(item.Data);
+	}
 
 
 

@@ -1,17 +1,19 @@
 [gd_resource type="Resource" script_class="ItemPlacableData" load_steps=4 format=3 uid="uid://51ds64xgl4t5"]
 
-[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_s8y6h"]
-[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_i8fk4"]
+[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_816bc"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_pns4p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnbij"]
-atlas = ExtResource("1_s8y6h")
+atlas = ExtResource("1_816bc")
 region = Rect2(48, 0, 16, 16)
 filter_clip = true
 
 [resource]
-script = ExtResource("2_i8fk4")
+script = ExtResource("2_pns4p")
+Layer = 0
 Texture = SubResource("AtlasTexture_fnbij")
 Frames = 1
+AutoPlayAnim = false
 Name = "Stone Floor"
 Id = &"_:StoneFloor"
 Description = "Floor made out of stone"

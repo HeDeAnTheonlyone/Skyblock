@@ -44,16 +44,17 @@ public partial class InventoryItem : Control
         if (Data.Frames > 1)
         {
             Rect2I rect = (Rect2I)Data.Texture.Region;
-            Image altasImage = Data.Texture.Atlas.GetImage();
+            Image atlasImage = Data.Texture.Atlas.GetImage();
 
             for (int i = 0; i < Data.Frames; i++)
             {
-                anim.AddFrame("Idle", ImageTexture.CreateFromImage(altasImage.GetRegion(rect)));
+                anim.AddFrame("Idle", ImageTexture.CreateFromImage(atlasImage.GetRegion(rect)));
                 rect.Position = rect.Position with { X = rect.Position.X + rect.Size.X };
             }
 
             sprite.SpriteFrames = anim;
-            sprite.Play("Idle");
+            sprite.Animation = "Idle";
+            if (Data.AutoPlayAnim) sprite.Play();
         }
         else
         {

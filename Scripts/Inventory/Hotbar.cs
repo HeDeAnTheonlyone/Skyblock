@@ -6,7 +6,7 @@ using System.Linq;
 public partial class Hotbar : Control
 {
 	private HBoxContainer itemList;
-	private Panel selection;
+	private Panel selectionHighlight;
 	private int selected = 0;
 	public int Selected
 	{ 
@@ -21,6 +21,7 @@ public partial class Hotbar : Control
 				selected = 9;
 
 			MoveSelection();
+			EmitSignal(SignalName.HotbarSlotChanged, selected);
 		}
 	}
 
@@ -29,7 +30,7 @@ public partial class Hotbar : Control
 	public override void _Ready()
 	{
 		itemList = GetNode<HBoxContainer>("Padding/ItemList");
-		selection = GetNode<Panel>("Selection");
+		selectionHighlight = GetNode<Panel>("Selection");
 
 		CallDeferred("MoveSelection");
 	}
@@ -50,9 +51,12 @@ public partial class Hotbar : Control
     private void MoveSelection()
 	{
 		Slot slot = itemList.GetNode<Slot>($"Slot{Selected}");
-		selection.GlobalPosition = slot.GetVisualPosition();
-		selection.Size = slot.getVisualSize();
+		selectionHighlight.GlobalPosition = slot.GetVisualPosition();
+		selectionHighlight.Size = slot.getVisualSize();
 	}
+
+
+	[Signal] public delegate void HotbarSlotChangedEventHandler(int itemIndex);
 
 
 

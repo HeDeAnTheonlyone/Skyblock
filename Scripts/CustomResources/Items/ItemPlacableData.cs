@@ -5,32 +5,7 @@ using Godot;
 [GlobalClass, Icon("res://Assets/Icons/PlaceDown.svg")]
 public partial class ItemPlacableData : ItemData
 {
-    private int? placeLayer = null;
-    public int PlaceLayer
-    {
-        get
-        {
-            if (placeLayer != null)
-                return (int)placeLayer; 
-
-            switch (Texture.Atlas.ResourcePath)
-            {
-                case "res://Assets/Items/Floor.png":
-                    placeLayer = 0;
-                    break;
-
-                case "res://Assets/Items/Decoration.png":
-                    placeLayer = 1;
-                    break;
-
-                default:
-                    placeLayer = 0;
-                    break;
-            }
-
-            return (int)placeLayer;
-        }
-    }
+    [Export] public PlaceLayer Layer { get; private set; } = PlaceLayer.Floor;
     private Vector2I? tileCoordinates = null;
     public Vector2I TileCoordinates
     {
@@ -59,4 +34,11 @@ public partial class ItemPlacableData : ItemData
 
 
     public ItemPlacableData(AtlasTexture texture, string name, StringName id, string description, int maxStackSize = 1000) : base(texture, name, id, description, maxStackSize) {}
+
+
+
+    public enum PlaceLayer {
+        Floor,
+        Decoration
+    }
 }

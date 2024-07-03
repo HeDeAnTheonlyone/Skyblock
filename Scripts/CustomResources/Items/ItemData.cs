@@ -6,9 +6,10 @@ using Godot;
 public abstract partial class ItemData : Resource
 {
     [ExportGroup("Item")]
-    [ExportSubgroup("Texture")]
-    [Export] public virtual AtlasTexture Texture { get; protected set; }
+    [ExportSubgroup("Texture"),]
+    [Export] public AtlasTexture Texture { get; protected set; }
     [Export] public int Frames { get; protected set; } = 1;
+    [Export] public bool AutoPlayAnim { get; protected set; } = false;
     //
     [ExportSubgroup("Properties")]
     [Export] public string Name { get; protected set; }

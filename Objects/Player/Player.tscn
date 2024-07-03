@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cdsj51bbxcsu3"]
+[gd_scene load_steps=43 format=3 uid="uid://cdsj51bbxcsu3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_4urdj"]
 [ext_resource type="Texture2D" uid="uid://dbkmhvyh3ybop" path="res://Assets/Player/PlayerAnim.png" id="2_5mg7w"]
@@ -146,70 +146,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxoxy"]
-size = Vector2(12, 12)
+size = Vector2(12, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyh1m"]
+size = Vector2(6, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0gu3"]
 size = Vector2(8, 3)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q7v6i"]
-load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ks6h1"]
-atlas = SubResource("CompressedTexture2D_q7v6i")
-region = Rect2(32, 0, 16, 16)
-filter_clip = true
-
-[sub_resource type="Resource" id="Resource_3ifk2"]
-script = ExtResource("7_wcr1h")
-Texture = SubResource("AtlasTexture_ks6h1")
-Frames = 1
-Name = "Dirt Floor"
-Id = &"_:DirtFloor"
-Description = "Floor made out of dirt"
-MaxStackSize = 1000
-StackSize = 500
-SlotType = 0
-Rarity = 0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_00soh"]
-load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mbrwc"]
-atlas = SubResource("CompressedTexture2D_00soh")
-region = Rect2(16, 0, 16, 16)
-filter_clip = true
-
-[sub_resource type="Resource" id="Resource_jpwpg"]
-script = ExtResource("7_wcr1h")
-Texture = SubResource("AtlasTexture_mbrwc")
-Frames = 1
-Name = "Planks Floor"
-Id = &"_:PlanksFloor"
-Description = "Floor made out of wood"
-MaxStackSize = 1000
-StackSize = 500
-SlotType = 0
-Rarity = 0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxh2m"]
-load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_auwlg"]
-atlas = SubResource("CompressedTexture2D_dxh2m")
-region = Rect2(48, 0, 16, 16)
-filter_clip = true
-
-[sub_resource type="Resource" id="Resource_mscor"]
-script = ExtResource("7_wcr1h")
-Texture = SubResource("AtlasTexture_auwlg")
-Frames = 1
-Name = "Stone Floor"
-Id = &"_:StoneFloor"
-Description = "Floor made out of stone"
-MaxStackSize = 1000
-StackSize = 500
-SlotType = 0
-Rarity = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_21tdv"]
 load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
@@ -223,6 +166,7 @@ filter_clip = true
 script = ExtResource("2_p20tq")
 Texture = SubResource("AtlasTexture_c578y")
 Frames = 0
+AutoPlayAnim = false
 Name = "Stone"
 Id = &"_:Stone"
 Description = "Can be gathered from rocks"
@@ -231,14 +175,80 @@ StackSize = 10
 SlotType = 0
 Rarity = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dydh7"]
+load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm7s4"]
+atlas = SubResource("CompressedTexture2D_dydh7")
+region = Rect2(32, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_8fou0"]
+script = ExtResource("7_wcr1h")
+Layer = 0
+Texture = SubResource("AtlasTexture_mm7s4")
+Frames = 1
+AutoPlayAnim = false
+Name = "Dirt Floor"
+Id = &"_:DirtFloor"
+Description = "Floor made out of dirt"
+MaxStackSize = 1000
+StackSize = 500
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qq11u"]
+load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i12a3"]
+atlas = SubResource("CompressedTexture2D_qq11u")
+region = Rect2(16, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_1gvj0"]
+script = ExtResource("7_wcr1h")
+Layer = 0
+Texture = SubResource("AtlasTexture_i12a3")
+Frames = 1
+AutoPlayAnim = false
+Name = "Planks Floor"
+Id = &"_:PlanksFloor"
+Description = "Floor made out of wood"
+MaxStackSize = 1000
+StackSize = 500
+SlotType = 0
+Rarity = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l6vh7"]
+load_path = "res://.godot/imported/Floor.png-9cfbfbc3cfa535d7ef48372d7923a038.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72f1x"]
+atlas = SubResource("CompressedTexture2D_l6vh7")
+region = Rect2(48, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="Resource" id="Resource_xspww"]
+script = ExtResource("7_wcr1h")
+Layer = 0
+Texture = SubResource("AtlasTexture_72f1x")
+Frames = 1
+AutoPlayAnim = false
+Name = "Stone Floor"
+Id = &"_:StoneFloor"
+Description = "Floor made out of stone"
+MaxStackSize = 1000
+StackSize = 500
+SlotType = 0
+Rarity = 0
+
 [sub_resource type="Resource" id="Resource_qhmgl"]
 script = ExtResource("8_dpxyh")
-Table = Array[Object]([SubResource("Resource_3ifk2"), SubResource("Resource_jpwpg"), SubResource("Resource_mscor"), SubResource("Resource_poo1f")])
+Table = Array[Object]([SubResource("Resource_poo1f"), SubResource("Resource_8fou0"), SubResource("Resource_1gvj0"), SubResource("Resource_xspww")])
 Rolls = 0
 
 [node name="Player" type="RigidBody2D"]
 y_sort_enabled = true
-collision_layer = 6
+collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
 lock_rotation = true
@@ -250,15 +260,25 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x5ing")
 animation = &"WalkDown"
 
-[node name="Shape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_fxoxy")
 debug_color = Color(0, 0.643137, 0.270588, 0.419608)
+
+[node name="ItemCollector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
+input_pickable = false
+monitorable = false
+
+[node name="Hitbox" type="CollisionShape2D" parent="ItemCollector"]
+position = Vector2(0, -13.5)
+shape = SubResource("RectangleShape2D_pyh1m")
 
 [node name="GroundDetector" type="Area2D" parent="."]
 input_pickable = false
 
-[node name="Shape" type="CollisionShape2D" parent="GroundDetector"]
+[node name="Hitbox" type="CollisionShape2D" parent="GroundDetector"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_j0gu3")
 debug_color = Color(0.890196, 0, 0.0784314, 0.419608)
@@ -278,4 +298,5 @@ zoom = Vector2(3.5, 3.5)
 [node name="PlayerInventory" parent="Overlay" instance=ExtResource("5_1yia4")]
 TestTable = SubResource("Resource_qhmgl")
 
+[connection signal="area_entered" from="ItemCollector" to="." method="CollectItem"]
 [connection signal="body_exited" from="GroundDetector" to="." method="Death"]

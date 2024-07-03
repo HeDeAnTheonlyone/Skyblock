@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemPlacableData" load_steps=4 format=3 uid="uid://0mghy2bn0ud"]
+
+[ext_resource type="Texture2D" uid="uid://s1115ycewgjs" path="res://Assets/Items/Decorations.png" id="1_1bi05"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="1_538hr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axthj"]
+atlas = ExtResource("1_1bi05")
+region = Rect2(32, 0, 16, 16)
+filter_clip = true
+
+[resource]
+script = ExtResource("1_538hr")
+Layer = 1
+Texture = SubResource("AtlasTexture_axthj")
+Frames = 2
+AutoPlayAnim = false
+Name = "Chest"
+Id = &"_:Chest"
+Description = "A container made out of basic wood to store your items"
+MaxStackSize = 1000
+StackSize = 1
+SlotType = 0
+Rarity = 0

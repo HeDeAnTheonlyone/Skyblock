@@ -7,7 +7,7 @@ using System;
 
 
 /// <summary>
-/// The exception that is thrown when a field is null when it should have a value at this point.
+/// This exception is thrown when a field is null when it should have a value at this point.
 /// </summary>
 public partial class FieldIsNullException : Exception
 {

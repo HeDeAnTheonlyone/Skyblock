@@ -3,25 +3,28 @@
 [ext_resource type="PackedScene" uid="uid://cwmo020cx751q" path="res://Objects/Grid.tscn" id="1_giwyk"]
 [ext_resource type="PackedScene" uid="uid://cdsj51bbxcsu3" path="res://Objects/Player/Player.tscn" id="1_vlo3o"]
 [ext_resource type="PackedScene" uid="uid://rjt738ui058t" path="res://Objects/InWorldItem.tscn" id="3_ft6xs"]
-[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemMaterialData.cs" id="4_qfpno"]
 [ext_resource type="PackedScene" uid="uid://dt5aikkthlorw" path="res://Objects/Sky.tscn" id="5_tqdgw"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="6_yikbi"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7idgj"]
-load_path = "res://.godot/imported/Materials.png-a652168228e5f2f3dad2ea035a40aeef.ctex"
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n2pr8"]
+load_path = "res://.godot/imported/Decorations.png-c45befbd17e42c0e718fdd6817210b9a.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tc0ep"]
-atlas = SubResource("CompressedTexture2D_7idgj")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe6km"]
+atlas = SubResource("CompressedTexture2D_n2pr8")
+region = Rect2(32, 0, 16, 16)
+filter_clip = true
 
-[sub_resource type="Resource" id="Resource_dhq0q"]
-script = ExtResource("4_qfpno")
-Texture = SubResource("AtlasTexture_tc0ep")
-Frames = 1
-Name = "Wood"
-Id = &"_:Wood"
-Description = "Can be gathered from trees"
+[sub_resource type="Resource" id="Resource_sudc6"]
+script = ExtResource("6_yikbi")
+Layer = 1
+Texture = SubResource("AtlasTexture_fe6km")
+Frames = 2
+AutoPlayAnim = false
+Name = "Chest"
+Id = &"_:Chest"
+Description = "A container made out of basic wood to store your items"
 MaxStackSize = 1000
-StackSize = 500
+StackSize = 1
 SlotType = 0
 Rarity = 0
 
@@ -29,12 +32,18 @@ Rarity = 0
 
 [node name="Grid" parent="." instance=ExtResource("1_giwyk")]
 layer_0/name = "Floor"
-layer_0/tile_data = PackedInt32Array(-1, 65536, 0, -65536, 65536, 0, 0, 65536, 0, 65535, 65536, 0, 131071, 65536, 0, 65536, 65536, 0, 1, 65536, 0, -65535, 65536, 0, -131072, 65536, 0, -65537, 65536, 0, -2, 65536, 0, 65534, 65536, 0, 65537, 131072, 0, 131073, 131072, 0, 131072, 131072, 0, 196607, 131072, 0, 196606, 131072, 0, 131070, 131072, 0, 131069, 131072, 0, 65533, 131072, 0, -3, 131072, 0, -65539, 131072, 0, -65538, 131072, 0, -131074, 131072, 0, -131073, 131072, 0, -196608, 131072, 0, -196607, 131072, 0, -131071, 131072, 0, -131070, 131072, 0, -65534, 131072, 0, 2, 131072, 0, 65538, 131072, 0, 262142, 196608, 0, 262143, 196608, 0, 196608, 196608, 0, 196609, 196608, 0, 196610, 196608, 0, 131074, 196608, 0, 131075, 196608, 0, 65539, 196608, 0, 3, 196608, 0, -65533, 196608, 0, -131069, 196608, 0, -196605, 196608, 0, -196606, 196608, 0, -262142, 196608, 0, -262143, 196608, 0, -262144, 196608, 0, -196609, 196608, 0, -196610, 196608, 0, -196611, 196608, 0, -131075, 196608, 0, -131076, 196608, 0, -65540, 196608, 0, -4, 196608, 0, 65532, 196608, 0, 131068, 196608, 0, 196604, 196608, 0, 196605, 196608, 0, 262141, 196608, 0)
+layer_0/tile_data = PackedInt32Array(-1, 131072, 0, -65536, 131072, 0, 0, 131072, 0, 65535, 131072, 0, 131071, 131072, 0, 65536, 131072, 0, 1, 131072, 0, -65535, 131072, 0, -131072, 131072, 0, -65537, 131072, 0, -2, 131072, 0, 65534, 131072, 0, 65537, 65536, 0, 131073, 65536, 0, 131072, 65536, 0, 196607, 65536, 0, 196606, 65536, 0, 131070, 65536, 0, 131069, 65536, 0, 65533, 65536, 0, -3, 65536, 0, -65539, 65536, 0, -65538, 65536, 0, -131074, 65536, 0, -131073, 65536, 0, -196608, 65536, 0, -196607, 65536, 0, -131071, 65536, 0, -131070, 65536, 0, -65534, 65536, 0, 2, 65536, 0, 65538, 65536, 0, 262142, 196608, 0, 262143, 196608, 0, 196608, 196608, 0, 196609, 196608, 0, 196610, 196608, 0, 131074, 196608, 0, 131075, 196608, 0, 65539, 196608, 0, 3, 196608, 0, -65533, 196608, 0, -131069, 196608, 0, -196605, 196608, 0, -196606, 196608, 0, -262142, 196608, 0, -262143, 196608, 0, -262144, 196608, 0, -196609, 196608, 0, -196610, 196608, 0, -196611, 196608, 0, -131075, 196608, 0, -131076, 196608, 0, -65540, 196608, 0, -4, 196608, 0, 65532, 196608, 0, 131068, 196608, 0, 196604, 196608, 0, 196605, 196608, 0, 262141, 196608, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_vlo3o")]
 
-[node name="InWorldItem" parent="." instance=ExtResource("3_ft6xs")]
-position = Vector2(-42, 0)
-Data = SubResource("Resource_dhq0q")
-
 [node name="Sky" parent="." instance=ExtResource("5_tqdgw")]
+
+[node name="InWorldItem" parent="." instance=ExtResource("3_ft6xs")]
+position = Vector2(32, -3)
+Data = SubResource("Resource_sudc6")
+
+[node name="CollectArea" parent="InWorldItem" index="0"]
+collision_mask = 4
+monitoring = true
+
+[editable path="InWorldItem"]

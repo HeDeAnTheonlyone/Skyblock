@@ -1,17 +1,19 @@
 [gd_resource type="Resource" script_class="ItemPlacableData" load_steps=4 format=3 uid="uid://djhjgr6ah6xj1"]
 
-[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_karr8"]
-[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_1u85e"]
+[ext_resource type="Texture2D" uid="uid://e2sxw86gfglg" path="res://Assets/Items/Floor.png" id="1_enxqs"]
+[ext_resource type="Script" path="res://Scripts/CustomResources/Items/ItemPlacableData.cs" id="2_i7uv2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_poxlv"]
-atlas = ExtResource("1_karr8")
+atlas = ExtResource("1_enxqs")
 region = Rect2(16, 0, 16, 16)
 filter_clip = true
 
 [resource]
-script = ExtResource("2_1u85e")
+script = ExtResource("2_i7uv2")
+Layer = 0
 Texture = SubResource("AtlasTexture_poxlv")
 Frames = 1
+AutoPlayAnim = false
 Name = "Planks Floor"
 Id = &"_:PlanksFloor"
 Description = "Floor made out of wood"

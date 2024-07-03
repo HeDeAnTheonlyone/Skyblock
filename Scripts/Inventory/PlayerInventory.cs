@@ -61,10 +61,15 @@ public partial class PlayerInventory : Inventory
 				Open();
         }
 
-		/// TEMP temporary inputs
+		if (@event.IsActionReleased("Escape") && Visible)
+		{
+			Close();
+		}
+
+		/// TEMP\/ temporary inputs
 		if (Input.IsActionJustPressed("Space"))
         {
-			GD.Print("Add test items");
+			GD.Print("Add test items"); //DEBUG
 			Data.AddItem(TestTable.PlainLoot());
         }
 
@@ -75,9 +80,9 @@ public partial class PlayerInventory : Inventory
 				if (item == null)
 					continue;
 
-				GD.Print(item.Name + "   " + item.StackSize + "/" + item.MaxStackSize);
+				GD.Print(item.Name + "   " + item.StackSize + "/" + item.MaxStackSize); //DEBUG
 			}
         }
-		///
+		/// TEMP /\
     }
 }

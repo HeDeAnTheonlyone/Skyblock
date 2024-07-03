@@ -11,11 +11,11 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        /// TEMP Remove Temporary values
+        /// TEMP \/ Temporary values
 
         CurrentLevel = "DevWorld";
 
-        ///
+        /// TEMP /\
 
         Engine.MaxFps = (int)DisplayServer.ScreenGetRefreshRate(DisplayServer.GetPrimaryScreen()) + 20;
 
@@ -34,11 +34,21 @@ public partial class GameManager : Node
 
 
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionReleased("ToggleFullscreen"))
+        {
+            GetWindow().Mode = GetWindow().Mode == Window.ModeEnum.Windowed ? Window.ModeEnum.Fullscreen : Window.ModeEnum.Windowed;
+        }
+    }
+
+
+
     public static void ShowInWorldCursor(bool yes)
     {
         if (yes)
             Input.SetCustomMouseCursor(Instance.inWorldCursor, hotspot: Instance.inWorldCursor.GetSize() / 2);
-        else
+        else 
             Input.SetCustomMouseCursor(null);
     }
 }

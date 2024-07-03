@@ -32,8 +32,7 @@ public partial class AnimatedTextureRect : TextureRect
 
 	public override void _Ready()
 	{
-		if (AutoPlay)
-			Play();
+		if (AutoPlay) Play();
 	}
 
 
@@ -44,11 +43,9 @@ public partial class AnimatedTextureRect : TextureRect
 		{
 			if (!SpriteFrames.HasAnimation(Animation))
 				throw new ArgumentException($"The Animation '{Animation}' in '{GetPath()}' does not exist!");
-
+			
 			frameDelta += SpeedScale * delta;
-
-			if (frameDelta >= refreshRate / fps)
-				Texture = GetNextFrame();
+			if (frameDelta >= refreshRate / fps) Texture = GetNextFrame();
 		}
     }
 
@@ -61,8 +58,7 @@ public partial class AnimatedTextureRect : TextureRect
 		if (Frame >= SpriteFrames.GetFrameCount(Animation))
 		{
 			Frame = 0;
-			if (!Looping)
-				Playing = false;
+			if (!Looping) Playing = false;
 		}
 
 		refreshRate = SpriteFrames.GetFrameDuration(Animation, Frame);
@@ -72,16 +68,17 @@ public partial class AnimatedTextureRect : TextureRect
 	}
 
 
-
+	/// <summary>
+	/// Plays the animation with key name.
+	/// If this method is called with that same animation name, or with no name parameter, the assigned animation will resume playing if it was paused.
+	/// </summary>
+	/// <param name="animationName"></param>
 	public void Play(string animationName = null)
 	{
 		Frame = 0;
 		frameDelta = 0;
 		
-		if (animationName != null)
-			Animation = animationName;
-
-		GD.Print(Animation);
+		if (animationName != null) Animation = animationName;
 
 		fps = SpriteFrames.GetAnimationSpeed(Animation);
 		refreshRate = SpriteFrames.GetFrameDuration(Animation, Frame);
